@@ -26,7 +26,6 @@ jobs:
         
     - run: ls -la
     - run: mkdir json
-    - run: cp ./html/latest.html ./html/latest/index.html
     - name: Get laws.json
       run: curl https://tcfshsu.github.io/law/json/laws.json > ./json/laws.json
     - name: Get cases.json
@@ -37,6 +36,7 @@ jobs:
       run: curl https://tcfshsu.github.io/law/json/parties.json > ./json/parties.json
     - name: Generate files
       run: dotnet run
+    - run: cp ./html/latest.html ./html/latest/index.html
       
     - name: Setup Pages
       uses: actions/configure-pages@v5
