@@ -252,14 +252,14 @@ display : inline-block ;
 <footer>
 <div class="footer-upper">
 <ul>
-<li><a href="laws?c=c" tabindex="9" @onclick="ToLC" @onclick:preventDefault>中央法規</a></li>
-<li><a href="laws?c=ex" tabindex="9" @onclick="ToLEx" @onclick:preventDefault>行政法規</a></li>
-<li><a href="laws?c=l" tabindex="9" @onclick="ToLL" @onclick:preventDefault>立法法規</a></li>
-<li><a href="laws?c=j" tabindex="9" @onclick="ToLJ" @onclick:preventDefault>司法法規</a></li>
-<li><a href="laws?c=el" tabindex="9" @onclick="ToLEl" @onclick:preventDefault>選舉法規</a></li>
-<li><a href="cases" tabindex="9" @onclick="ToC" @onclick:preventDefault>判例查詢</a></li>
-<li><a href="parties" tabindex="9" @onclick="ToP" @onclick:preventDefault>政黨查詢</a></li>
-<li><a href="rel" tabindex="9" @onclick="ToRel" @onclick:preventDefault>相關連結</a></li>
+<li><a href="laws?c=c" tabindex="9">中央法規</a></li>
+<li><a href="laws?c=ex" tabindex="9">行政法規</a></li>
+<li><a href="laws?c=l" tabindex="9">立法法規</a></li>
+<li><a href="laws?c=j" tabindex="9">司法法規</a></li>
+<li><a href="laws?c=el" tabindex="9">選舉法規</a></li>
+<li><a href="cases" tabindex="9">判例查詢</a></li>
+<li><a href="parties" tabindex="9">政黨查詢</a></li>
+<li><a href="rel" tabindex="9">相關連結</a></li>
 </ul>
 </div>
 <div class="footer-note">
