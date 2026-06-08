@@ -1628,13 +1628,13 @@ border-right : 1px #000 solid ;
 			o.WriteLine( "let temp = {} ; " ) ; 
 			o.WriteLine( "temp[q.split( '=' )[0]] = q.split( '=' )[1] ; " ) ; 
 			o.WriteLine( "qq.push( temp ) ; " ) ; 
-			o.WriteLine( ")} " ) ; 
+			o.WriteLine( "} " ) ; 
 			o.WriteLine( "const no = qq.filter( i => i.no )[0] ; " ) ; 
 			o.WriteLine( "console.log( no ) ; " ) ; 
 			o.WriteLine( "if( no ) " ) ; 
 			o.WriteLine( "{" ) ; 
 			o.WriteLine( "window.location.replace( \"https://tcfshsu.github.io/law/latest?no=\" + no.no ) ; " ) ; 
-			o.WriteLine( ")}" ) ; 
+			o.WriteLine( "}" ) ; 
 			o.WriteLine( "</script>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
