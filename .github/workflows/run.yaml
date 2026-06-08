@@ -25,6 +25,7 @@ jobs:
         dotnet-version: 10.0.x
         
     - run: ls -la
+    - run: mkdir json
     - name: Get laws.json
       run: curl https://tcfshsu.github.io/law/json/laws.json > ./json/laws.json
     - name: Get cases.json
