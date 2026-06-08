@@ -1618,6 +1618,7 @@ border-right : 1px #000 solid ;
 		}
 		using (StreamWriter o = File.AppendText("./html/latest.html"))
 		{
+			o.WriteLine( Head( "最新消息" ) ) ; 
 			o.WriteLine( nos ) ; 
 			o.WriteLine( "<script>" ) ; 
 			o.WriteLine( "const qa =  window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
@@ -1635,6 +1636,7 @@ border-right : 1px #000 solid ;
 			o.WriteLine( "window.location.replace( \"https://tcfshsu.github.io/law/latest?no=\" + no.no ) ; " ) ; 
 			o.WriteLine( ")}" ) ; 
 			o.WriteLine( "</script>" ) ; 
+			o.WriteLine( foot ) ; 
 		}
 		foreach( var la in las ) 
 		{
