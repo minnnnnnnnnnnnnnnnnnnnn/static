@@ -36,7 +36,6 @@ jobs:
       run: curl https://tcfshsu.github.io/law/json/parties.json > ./json/parties.json
     - name: Generate files
       run: dotnet run
-    - run: cp ./html/latest.html ./html/latest/index.html
       
     - name: Setup Pages
       uses: actions/configure-pages@v5
