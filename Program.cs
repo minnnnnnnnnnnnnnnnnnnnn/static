@@ -1791,7 +1791,7 @@ border-right : 1px #000 solid ;
 			// o.WriteLine( "const no = qq.filter( i => i.no )[0] ; " ) ; 
 			o.WriteLine( "if( party ) " ) ; 
 			o.WriteLine( "{" ) ; 
-			o.WriteLine( "window.location.replace( document.baseURI + \"/party/detail/\" + party.party ) ; " ) ; 
+			o.WriteLine( "window.location.replace( document.baseURI + \"/parties/detail/\" + party.party ) ; " ) ; 
 			o.WriteLine( "}" ) ; 
 			o.WriteLine( "</script>" ) ; 
 			o.WriteLine( foot ) ; 
