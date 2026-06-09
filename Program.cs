@@ -54,8 +54,8 @@ class Program
 <meta charset="utf-8" />
 <base href="/static/" />
 <title>
-""" + pageTitle + """
- - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</title>
+""" + ( string.IsNullOrEmpty( pageTitle ) ? "" :$"{ pageTitle } - " ) + """
+臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</title>
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <meta name="author" content="louischo303@" />
 <meta name="keywords" content="臺中市立臺中第一高級中等學校,臺中市立臺中第一高級中等學校學生自治聯合會,臺中一中學聯會,台中一中學聯會,中一中學聯會,一中學聯會,中一中學生會,一中學生會,自治部,臺中一中,台中一中,中一中,一中,一中學聯會,學聯會,法規,法規資料庫,學聯會法規,學生會,學生議會,學生政黨,政黨,組織章程,章程,三權分立,一讀,二讀,第一讀會,第二讀會,組織及職權行使法,職權行使法,議會監察使,會長,學生會會長,學生會長,學生議會議長,議長,評議委員會,評議委員會主任委員,主任委員,評委會,評委會主委,咨詢委員,咨委" />
@@ -1671,7 +1671,7 @@ border-right : 1px #000 solid ;
 					o.WriteLine( "修正法規" ) ; 
 					o.WriteLine( "</dt>" ) ; 
 					o.WriteLine( "<dd>" ) ; 
-					o.WriteLine($"<a href=\"{ lc.LawURL }?f=ln{ la.No }\">" ) ; 
+					o.WriteLine($"<a href=\"{ lc.LawURL }&f=ln{ la.No }\">" ) ; 
 					o.WriteLine( lc.LawName ) ; 
 					o.WriteLine( "</a>" ) ; 
 					o.WriteLine( "</dd>" ) ; 
@@ -1776,7 +1776,24 @@ border-right : 1px #000 solid ;
 		using (StreamWriter o = File.AppendText("./html/parties/detail.html"))
 		{
 			o.WriteLine( Head( "" ) ) ; 
-			o.WriteLine( Bread( "政黨查詢:parties>政黨詳細資料" ) ) ; 
+			o.WriteLine( nos ) ; 
+			o.WriteLine( "<script>" ) ; 
+			o.WriteLine( "const qa =  window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
+			o.WriteLine( "let qq = Array() ; " ) ; 
+			o.WriteLine( "for( let q of qa ) " ) ; 
+			o.WriteLine( "{" ) ; 
+			o.WriteLine( "let temp = {} ; " ) ; 
+			o.WriteLine( "temp[q.split( '=' )[0]] = q.split( '=' )[1] ; " ) ; 
+			o.WriteLine( "qq.push( temp ) ; " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "const party = qq.filter( i => i.party )[0] ; " ) ; 
+			// o.WriteLine( "const no = qq.filter( i => i.no )[0] ; " ) ; 
+			// o.WriteLine( "const no = qq.filter( i => i.no )[0] ; " ) ; 
+			o.WriteLine( "if( party ) " ) ; 
+			o.WriteLine( "{" ) ; 
+			o.WriteLine( "window.location.replace( document.baseURI + \"/party/detail/\" + party.party ) ; " ) ; 
+			o.WriteLine( "}" ) ; 
+			o.WriteLine( "</script>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
 		foreach( var p in parties ) 
