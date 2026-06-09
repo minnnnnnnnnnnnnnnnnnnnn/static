@@ -1634,7 +1634,7 @@ border-right : 1px #000 solid ;
 			o.WriteLine( "console.log( no ) ; " ) ; 
 			o.WriteLine( "if( no ) " ) ; 
 			o.WriteLine( "{" ) ; 
-			o.WriteLine( "window.location.replace( \"latest/\" + no.no ) ; " ) ; 
+			o.WriteLine( "window.location.replace( document.baseURI + \"/latest/\" + no.no ) ; " ) ; 
 			o.WriteLine( "}" ) ; 
 			o.WriteLine( "</script>" ) ; 
 			o.WriteLine( foot ) ; 
