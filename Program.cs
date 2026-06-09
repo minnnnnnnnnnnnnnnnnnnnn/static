@@ -316,6 +316,27 @@ display : inline-block ;
 			o.WriteLine( "</div>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
+		using (StreamWriter o = File.AppendText("./html/laws/law.html"))
+		{
+			o.WriteLine( Head( "" ) ) ; 
+			o.WriteLine( nos ) ; 
+			o.WriteLine( "<script>" ) ; 
+			o.WriteLine( "const qa =  window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
+			o.WriteLine( "let qq = Array() ; " ) ; 
+			o.WriteLine( "for( let q of qa ) " ) ; 
+			o.WriteLine( "{" ) ; 
+			o.WriteLine( "let temp = {} ; " ) ; 
+			o.WriteLine( "temp[q.split( '=' )[0]] = q.split( '=' )[1] ; " ) ; 
+			o.WriteLine( "qq.push( temp ) ; " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "const law = qq.filter( i => i.a )[0] ; " ) ; 
+			o.WriteLine( "if( law ) " ) ; 
+			o.WriteLine( "{" ) ; 
+			o.WriteLine( "window.location.replace( document.baseURI + \"laws/law/\" + law.a[0] + \"/\" + Number( law.a.substring(1) ) ) ; " ) ; 
+			o.WriteLine( "}" ) ; 
+			o.WriteLine( "</script>" ) ; 
+			o.WriteLine( foot ) ; 
+		}
 		foreach( var l in laws ) 
 		{
 			// Directory.CreateDirectory($"./{now}/laws" ) ; 
@@ -1787,8 +1808,6 @@ border-right : 1px #000 solid ;
 			o.WriteLine( "qq.push( temp ) ; " ) ; 
 			o.WriteLine( "} " ) ; 
 			o.WriteLine( "const party = qq.filter( i => i.party )[0] ; " ) ; 
-			// o.WriteLine( "const no = qq.filter( i => i.no )[0] ; " ) ; 
-			// o.WriteLine( "const no = qq.filter( i => i.no )[0] ; " ) ; 
 			o.WriteLine( "if( party ) " ) ; 
 			o.WriteLine( "{" ) ; 
 			o.WriteLine( "window.location.replace( document.baseURI + \"parties/detail/\" + party.party ) ; " ) ; 
