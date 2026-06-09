@@ -1899,7 +1899,24 @@ border-right : 1px #000 solid ;
 		using (StreamWriter o = File.AppendText("./html/cases/detail.html"))
 		{
 			o.WriteLine( Head( "" ) ) ; 
-			o.WriteLine( Bread( "判例查詢:cases>判例詳細資料" ) ) ; 
+			o.WriteLine( nos ) ; 
+			o.WriteLine( "<script>" ) ; 
+			o.WriteLine( "const qa =  window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
+			o.WriteLine( "let qq = Array() ; " ) ; 
+			o.WriteLine( "for( let q of qa ) " ) ; 
+			o.WriteLine( "{" ) ; 
+			o.WriteLine( "let temp = {} ; " ) ; 
+			o.WriteLine( "temp[q.split( '=' )[0]] = q.split( '=' )[1] ; " ) ; 
+			o.WriteLine( "qq.push( temp ) ; " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "const party = qq.filter( i => i.case )[0] ; " ) ; 
+			// o.WriteLine( "const no = qq.filter( i => i.no )[0] ; " ) ; 
+			// o.WriteLine( "const no = qq.filter( i => i.no )[0] ; " ) ; 
+			o.WriteLine( "if( party ) " ) ; 
+			o.WriteLine( "{" ) ; 
+			o.WriteLine( "window.location.replace( document.baseURI + \"/cases/detail/\" + case.case ) ; " ) ; 
+			o.WriteLine( "}" ) ; 
+			o.WriteLine( "</script>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
 		foreach( var c in cases ) 
