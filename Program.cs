@@ -52,7 +52,7 @@ class Program
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="utf-8" />
-<base href="static" />
+<base href="/static" />
 <title>
 """ + pageTitle + """
  - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</title>
