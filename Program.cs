@@ -1982,7 +1982,7 @@ class Program
 			o.WriteLine( "<option value=\"\">不限</option>" ) ; 
 			o.WriteLine( "<option value=\"章程訴訟\">章程訴訟</option>" ) ; 
 			o.WriteLine( "<option value=\"一般訴訟\">一般訴訟</option>" ) ; 
-			o.WriteLine( "<!-- <option value=\"懲戒訴訟\">懲戒訴訟</option> -->" ) ; 
+			o.WriteLine( "<option value=\"懲戒訴訟\">懲戒訴訟</option>" ) ; 
 			o.WriteLine( "</select>" ) ; 
 			o.WriteLine( "<p>" ) ; 
 			o.WriteLine( "<input type=\"search\" placeholder=\"輸入關鍵字以搜尋判例\" name=\"q\" value=\"\" />" ) ; 
