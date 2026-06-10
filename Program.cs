@@ -2031,6 +2031,8 @@ class Program
 			}
 			o.WriteLine( "</tbody>" ) ; 
 			o.WriteLine( "</table>" ) ; 
+			o.WriteLine( "<br />" ) ; 
+			o.WriteLine( "<a class=\"printNoDisplay\" href=\"\">回首頁</a>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
 		using (StreamWriter o = File.AppendText("./html/cases/detail.html"))
