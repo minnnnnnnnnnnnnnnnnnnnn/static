@@ -48,125 +48,125 @@ class Program
 	private static string Head( string pageTitle ) 
 	{
 		return """
-			<!DOCTYPE html>
-			<html lang="zh-Hant-TW">
-			<head>
-			<meta charset="utf-8" />
-			<base href="/static/" />
-			<title>
-			""" + ( string.IsNullOrEmpty( pageTitle ) ? "" :$"{ pageTitle } - " ) + """
-			臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</title>
-			<meta name="viewport" content="width=device-width,initial-scale=1.0" />
-			<meta name="author" content="louischo303@" />
-			<meta name="keywords" content="臺中市立臺中第一高級中等學校,臺中市立臺中第一高級中等學校學生自治聯合會,臺中一中學聯會,台中一中學聯會,中一中學聯會,一中學聯會,中一中學生會,一中學生會,自治部,臺中一中,台中一中,中一中,一中,一中學聯會,學聯會,法規,法規資料庫,學聯會法規,學生會,學生議會,學生政黨,政黨,組織章程,章程,三權分立,一讀,二讀,第一讀會,第二讀會,組織及職權行使法,職權行使法,議會監察使,會長,學生會會長,學生會長,學生議會議長,議長,評議委員會,評議委員會主任委員,主任委員,評委會,評委會主委,咨詢委員,咨委" />
-			<link rel="preconnect" href="https://fonts.googleapis.com">
-			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR:wght@200..900&family=IBM+Plex+Mono:wght@500&family=Noto+Sans+TC:wght@100..900&family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+SC:wght@100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Noto+Sans+Mono:wght@100..900&family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif+JP:wght@200..900&family=Noto+Serif+SC:wght@200..900&family=Noto			+Sans:wght@700&family=Noto+Serif+TC:wght@200..900&display=swap">
-			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/print.css" />
-			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/fonts.css" />
-			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/color.css" />
-			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/site.css" />
-			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/p.css" />
-			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/home.css" />
-			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/breadcrumb.css" />
-			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/app.css" />
-			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/law.css" />
-			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/darkmode.css" />
-			</head>
-			<body>
-			<style>
-			#lqc 
-			{
-			color : var( --header-bg ) ; 
-			background: linear-gradient(20deg, #fae0f7, #bd0f83);
-			border : 0 ; 
-			border-radius : 8.5px ; 
-			}
-			label[for="lqc"] 
-			{
-			display : none ; 
-			color : #fffad0 ; 
-			}
-			#lql , label[for="lql"] 
-			{
-			color : #ffc8d2 ; 
-			display : none ; 
-			}
-			#lql 
-			{
-			background: linear-gradient(20deg, #001d12, #a165fa);
-			border : 0 ; 
-			border-radius : 8.5px ; 
-			}
-			label[for="lql"] , label[for="lqc"] 
-			{
-			font-size : .8rem ; 
-			flex-shrink : 0 ; 
-			}
-			@media ( min-width : 768px ) 
-			{
-			#lql , label[for="lql"] , label[for="lqc"] 
-			{
-			display : inline-block ; 
-			}
-			}
-			</style>
-			<div>
-			<header>
-			<div class="top-guide">
-			<ul>
-			<li><a href="guide" tabindex="1">網站導覽</a></li>
-			<li id="zoom">
-			<span id="z_s" tabindex="1" style="font-size:13.6px;" onclick="document.documentElement.style.zoom='85%';this.className='Y';document.getElementById('z_m').className='';document.getElementById('z_l').className='';">A</span>
-			<span id="z_m" class="Y" tabindex="2" style="font-size:16px;" onclick="document.documentElement.style.zoom='100%';this.className='Y';document.getElementById('z_s').className='';document.getElementById('z_l').className='';">A</span>
-			<span id="z_l" tabindex="3" style="font-size:18.4px;" onclick="document.documentElement.style.zoom='115%';this.className='Y';document.getElementById('z_s').className='';document.getElementById('z_m').className='';">A</span>
-			</li>
-			</ul>
-			</div>
-			<div class="top">
-			<a tabindex="4" class="" href=""><img src="https://tcfshsu.github.io/law/i/icon/logo.png" alt="首頁" /></a>
-			<form action="laws" method="get">
-			<label for="lqc">類別：</label>
-			<select tabindex="5" name="c" id="lqc">
-			<option selected value="">不限</option>
-			<option value="c">中央法規</option>
-			<option value="ex">行政法規</option>
-			<option value="l">立法法規</option>
-			<option value="j">司法法規</option>
-			<option value="el">選舉法規</option>
-			</select>
-			<label for="lql">位階：</label>
-			<select tabindex="5" name="l" id="lql">
-			<option selected value="">不限</option>
-			<option value="章程">章程</option>
-			<option value="法律">法律</option>
-			<option value="命令">命令</option>
-			</select>
-			<p>
-			<input tabindex="6" type="search" placeholder="輸入關鍵字以搜尋" name="q" value="">
-			<input tabindex="7" type="submit" style="background-image:url(https://tcfshsu.github.io/law/i/icon/search_w.svg);width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;" value="" alt="搜尋！" />
-			</p>
-			</form>
-			<div tabindex="8" onclick="const b=document.getElementsByTagName('nav')[0].className;document.getElementsByTagName('nav')[0].className=b?'':'collapse';if(b)this.getElementsByTagName('path')[0].setAttribute('d','M3 3L21 21M3 21L21 3');else this.getElementsByTagName('path')[0].setAttribute('d','M3 12L21 12M3 6L21 6M3 18L21 18');">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12L21 12M3 6L21 6M3 18L21 18" /></svg>
-			</div>
-			</div>
-			<nav class="collapse">
-			<ul>
-			<li><a href="laws?c=c" tabindex="9">中央法規</a></li>
-			<li><a href="laws?c=ex" tabindex="9">行政法規</a></li>
-			<li><a href="laws?c=l" tabindex="9">立法法規</a></li>
-			<li><a href="laws?c=j" tabindex="9">司法法規</a></li>
-			<li><a href="laws?c=el" tabindex="9">選舉法規</a></li>
-			<li><a href="cases" tabindex="9">判例查詢</a></li>
-			<li><a href="parties" tabindex="9">政黨查詢</a></li>
-			<li><a href="rel" tabindex="9">相關連結</a></li>
-			</ul>
-			</nav>
-			</header>
-			<div>
-			<div id="top"></div>
-			<main class="main">
+		<!DOCTYPE html>
+		<html lang="zh-Hant-TW">
+		<head>
+		<meta charset="utf-8" />
+		<base href="/static/" />
+		<title>
+		""" + ( string.IsNullOrEmpty( pageTitle ) ? "" :$"{ pageTitle } - " ) + """
+		臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<meta name="author" content="louischo303@" />
+		<meta name="keywords" content="臺中市立臺中第一高級中等學校,臺中市立臺中第一高級中等學校學生自治聯合會,臺中一中學聯會,台中一中學聯會,中一中學聯會,一中學聯會,中一中學生會,一中學生會,自治部,臺中一中,台中一中,中一中,一中,一中學聯會,學聯會,法規,法規資料庫,學聯會法規,學生會,學生議會,學生政黨,政黨,組織章程,章程,三權分立,一讀,二讀,第一讀會,第二讀會,組織及職權行使法,職權行使法,議會監察使,會長,學生會會長,學生會長,學生議會議長,議長,評議委員會,評議委員會主任委員,主任委員,評委會,評委會主委,咨詢委員,咨委" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR:wght@200..900&family=IBM+Plex+Mono:wght@500&family=Noto+Sans+TC:wght@100..900&family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+SC:wght@100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Noto+Sans+Mono:wght@100..900&family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif+JP:wght@200..900&family=Noto+Serif+SC:wght@200..90&family=Noto			+Sans:wght@700&family=Noto+Serif+TC:wght@200..900&display=swap">
+		<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/print.css" />
+		<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/fonts.css" />
+		<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/color.css" />
+		<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/site.css" />
+		<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/p.css" />
+		<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/home.css" />
+		<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/breadcrumb.css" />
+		<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/app.css" />
+		<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/law.css" />
+		<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/darkmode.css" />
+		</head>
+		<body>
+		<style>
+		#lqc 
+		{
+		color : var( --header-bg ) ; 
+		background: linear-gradient(20deg, #fae0f7, #bd0f83);
+		border : 0 ; 
+		border-radius : 8.5px ; 
+		}
+		label[for="lqc"] 
+		{
+		display : none ; 
+		color : #fffad0 ; 
+		}
+		#lql , label[for="lql"] 
+		{
+		color : #ffc8d2 ; 
+		display : none ; 
+		}
+		#lql 
+		{
+		background: linear-gradient(20deg, #001d12, #a165fa);
+		border : 0 ; 
+		border-radius : 8.5px ; 
+		}
+		label[for="lql"] , label[for="lqc"] 
+		{
+		font-size : .8rem ; 
+		flex-shrink : 0 ; 
+		}
+		@media ( min-width : 768px ) 
+		{
+		#lql , label[for="lql"] , label[for="lqc"] 
+		{
+		display : inline-block ; 
+		}
+		}
+		</style>
+		<div>
+		<header>
+		<div class="top-guide">
+		<ul>
+		<li><a href="guide" tabindex="1">網站導覽</a></li>
+		<li id="zoom">
+		<span id="z_s" tabindex="1" style="font-size:13.6px;" onclick="document.documentElement.style.zoom='85%';this.className='Y';document.getElementById('z_m').className='';document.getElementById('z_l').className='';">A</span>
+		<span id="z_m" class="Y" tabindex="2" style="font-size:16px;" onclick="document.documentElement.style.zoom='100%';this.className='Y';document.getElementById('z_s').className='';document.getElementById('z_l').className='';">A</span>
+		<span id="z_l" tabindex="3" style="font-size:18.4px;" onclick="document.documentElement.style.zoom='115%';this.className='Y';document.getElementById('z_s').className='';document.getElementById('z_m').className='';">A</span>
+		</li>
+		</ul>
+		</div>
+		<div class="top">
+		<a tabindex="4" class="" href=""><img src="https://tcfshsu.github.io/law/i/icon/logo.png" alt="首頁" /></a>
+		<form action="laws" method="get">
+		<label for="lqc">類別：</label>
+		<select tabindex="5" name="c" id="lqc">
+		<option selected value="">不限</option>
+		<option value="c">中央法規</option>
+		<option value="ex">行政法規</option>
+		<option value="l">立法法規</option>
+		<option value="j">司法法規</option>
+		<option value="el">選舉法規</option>
+		</select>
+		<label for="lql">位階：</label>
+		<select tabindex="5" name="l" id="lql">
+		<option selected value="">不限</option>
+		<option value="章程">章程</option>
+		<option value="法律">法律</option>
+		<option value="命令">命令</option>
+		</select>
+		<p>
+		<input tabindex="6" type="search" placeholder="輸入關鍵字以搜尋" name="q" value="">
+		<input tabindex="7" type="submit" style="background-image:url(https://tcfshsu.github.io/law/i/icon/search_w.svg);width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;" value="" alt="搜尋！" />
+		</p>
+		</form>
+		<div tabindex="8" onclick="const b=document.getElementsByTagName('nav')[0].className;document.getElementsByTagName('nav')[0].className=b?'':'collapse';if(b)this.getElementsByTagName('path')[0].setAttribute('d','M3 3L21 21M3 21L21 3');else this.getElementsByTagName('path')[0].setAttribute('d','M3 12L21 12M3 6L21 6M3 18L21 18');">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12L21 12M3 6L21 6M3 18L21 18" /></svg>
+		</div>
+		</div>
+		<nav class="collapse">
+		<ul>
+		<li><a href="laws?c=c" tabindex="9">中央法規</a></li>
+		<li><a href="laws?c=ex" tabindex="9">行政法規</a></li>
+		<li><a href="laws?c=l" tabindex="9">立法法規</a></li>
+		<li><a href="laws?c=j" tabindex="9">司法法規</a></li>
+		<li><a href="laws?c=el" tabindex="9">選舉法規</a></li>
+		<li><a href="cases" tabindex="9">判例查詢</a></li>
+		<li><a href="parties" tabindex="9">政黨查詢</a></li>
+		<li><a href="rel" tabindex="9">相關連結</a></li>
+		</ul>
+		</nav>
+		</header>
+		<div>
+		<div id="top"></div>
+		<main class="main">
 		""" ; 
 	}
 	static void Main(string[] args)
@@ -294,7 +294,7 @@ class Program
 			</footer>
 			</body>
 			</html>
-		""" ; 
+			""" ; 
 		using (StreamWriter o = File.AppendText("./html/index.html"))
 		{
 			o.WriteLine( Head( "首頁" ) ) ; 
@@ -410,7 +410,7 @@ class Program
 					border-radius : 1px ; 
 					}
 					</style>
-				""" ) ; 
+					""" ) ; 
 				o.WriteLine($"<a href=\"{ l.LawURL.Replace( "laws/law" , "laws/lawe" ) }&c=&q=&l=&ab=\" class=\"printNoDisplay\">") ; 
 				o.WriteLine( "簡讀版") ; 
 				o.WriteLine( "</a>") ; 
@@ -960,7 +960,7 @@ class Program
 				padding-left : 2rem ; 
 				}
 				</style>
-			""" ) ; 
+				""" ) ; 
 			o.WriteLine( Bread( "網站導覽" ) ) ; 
 			o.WriteLine( """
 				<h1>網站導覽</h1>
@@ -992,7 +992,7 @@ class Program
 				</div>
 				<br class="printNoDisplay" />
 				<a class="printNoDisplay" href="">回首頁</a>
-			""" ) ; 
+				""" ) ; 
 			o.WriteLine( foot ) ; 
 		}
 		using (StreamWriter o = File.AppendText("./html/open.html"))
@@ -1542,7 +1542,7 @@ class Program
 				</div>
 				</div>
 				<a class="printNoDisplay" href="">回首頁</a>
-			""" ) ; 
+				""" ) ; 
 			o.WriteLine( foot ) ; 
 		}
 		using (StreamWriter o = File.AppendText("./html/s.html"))
@@ -1576,7 +1576,7 @@ class Program
 				</tr>
 				</thead>
 				<tbody style="font-family:'Fira Code', 'Sonti TC' , '標點' , 'Noto Serif KR' , 'Noto Serif TC' , 'Noto Serif JP' , 'Noto Serif SC' , sans-serif;">
-			""" ) ; 
+				""" ) ; 
 			string jj = nonch.Replace( json , "" ) ; 
 			int wc = jj.Length ; 
 			List<Result> lre = [] ; 
@@ -1625,7 +1625,7 @@ class Program
 				</tr>
 				</thead>
 				<tbody style="font-family:'Fira Code', 'Sonti TC' , '標點' , 'Noto Serif KR' , 'Noto Serif TC' , 'Noto Serif JP' , 'Noto Serif SC' , sans-serif;">
-			""" ) ; 
+				""" ) ; 
 			string cc = nonch.Replace( cjson , "" ) ; 
 			List<Result> cre = [] ; 
 			for( int i = 0 ; i < cc.Length ; ++ i ) 
@@ -1974,6 +1974,19 @@ class Program
 		{
 			o.WriteLine( Head( "判例查詢" ) ) ; 
 			o.WriteLine( Bread( "判例查詢" ) ) ; 
+			o.WriteLine( "<form action=\"cases\" method=\"get\" class=\"cq printNoDisplay\">" ) ; 
+			o.WriteLine( "<label for=\"c\">類別：</label>" ) ; 
+			o.WriteLine( "<select name=\"c\" id=\"c\">" ) ; 
+			o.WriteLine( "<option value=\"\">不限</option>" ) ; 
+			o.WriteLine( "<option value=\"章程訴訟\">章程訴訟</option>" ) ; 
+			o.WriteLine( "<option value=\"一般訴訟\">一般訴訟</option>" ) ; 
+			o.WriteLine( "<!-- <option value=\"懲戒訴訟\">懲戒訴訟</option> -->" ) ; 
+			o.WriteLine( "</select>" ) ; 
+			o.WriteLine( "<p>" ) ; 
+			o.WriteLine( "<input type=\"search\" placeholder=\"輸入關鍵字以搜尋判例\" name=\"q\" value=\"\" />" ) ; 
+			o.WriteLine( "<input type=\"submit\" style=\"background-image:url('https://tcfshsu.github.io/law/i/icon/search.svg');width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;\" value=\"\" alt=\"搜尋！\" />" ) ; 
+			o.WriteLine( "</p>" ) ; 
+			o.WriteLine( "</form>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
 		using (StreamWriter o = File.AppendText("./html/cases/detail.html"))
