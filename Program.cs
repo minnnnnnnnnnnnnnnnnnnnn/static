@@ -48,126 +48,126 @@ class Program
 	private static string Head( string pageTitle ) 
 	{
 		return """
-<!DOCTYPE html>
-<html lang="zh-Hant-TW">
-<head>
-<meta charset="utf-8" />
-<base href="/static/" />
-<title>
-""" + ( string.IsNullOrEmpty( pageTitle ) ? "" :$"{ pageTitle } - " ) + """
-臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</title>
-<meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<meta name="author" content="louischo303@" />
-<meta name="keywords" content="臺中市立臺中第一高級中等學校,臺中市立臺中第一高級中等學校學生自治聯合會,臺中一中學聯會,台中一中學聯會,中一中學聯會,一中學聯會,中一中學生會,一中學生會,自治部,臺中一中,台中一中,中一中,一中,一中學聯會,學聯會,法規,法規資料庫,學聯會法規,學生會,學生議會,學生政黨,政黨,組織章程,章程,三權分立,一讀,二讀,第一讀會,第二讀會,組織及職權行使法,職權行使法,議會監察使,會長,學生會會長,學生會長,學生議會議長,議長,評議委員會,評議委員會主任委員,主任委員,評委會,評委會主委,咨詢委員,咨委" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR:wght@200..900&family=IBM+Plex+Mono:wght@500&family=Noto+Sans+TC:wght@100..900&family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+SC:wght@100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Noto+Sans+Mono:wght@100..900&family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif+JP:wght@200..900&family=Noto+Serif+SC:wght@200..900&family=Noto+Sans:wght@700&family=Noto+Serif+TC:wght@200..900&display=swap">
-<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/print.css" />
-<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/fonts.css" />
-<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/color.css" />
-<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/site.css" />
-<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/p.css" />
-<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/home.css" />
-<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/breadcrumb.css" />
-<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/app.css" />
-<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/law.css" />
-<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/darkmode.css" />
-</head>
-<body>
-<style>
-#lqc 
-{
-color : var( --header-bg ) ; 
-background: linear-gradient(20deg, #fae0f7, #bd0f83);
-border : 0 ; 
-border-radius : 8.5px ; 
-}
-label[for="lqc"] 
-{
-display : none ; 
-color : #fffad0 ; 
-}
-#lql , label[for="lql"] 
-{
-color : #ffc8d2 ; 
-display : none ; 
-}
-#lql 
-{
-background: linear-gradient(20deg, #001d12, #a165fa);
-border : 0 ; 
-border-radius : 8.5px ; 
-}
-label[for="lql"] , label[for="lqc"] 
-{
-font-size : .8rem ; 
-flex-shrink : 0 ; 
-}
-@media ( min-width : 768px ) 
-{
-#lql , label[for="lql"] , label[for="lqc"] 
-{
-display : inline-block ; 
-}
-}
-</style>
-<div>
-<header>
-<div class="top-guide">
-<ul>
-<li><a href="guide" tabindex="1">網站導覽</a></li>
-<li id="zoom">
-<span id="z_s" tabindex="1" style="font-size:13.6px;" onclick="document.documentElement.style.zoom='85%';this.className='Y';document.getElementById('z_m').className='';document.getElementById('z_l').className='';">A</span>
-<span id="z_m" class="Y" tabindex="2" style="font-size:16px;" onclick="document.documentElement.style.zoom='100%';this.className='Y';document.getElementById('z_s').className='';document.getElementById('z_l').className='';">A</span>
-<span id="z_l" tabindex="3" style="font-size:18.4px;" onclick="document.documentElement.style.zoom='115%';this.className='Y';document.getElementById('z_s').className='';document.getElementById('z_m').className='';">A</span>
-</li>
-</ul>
-</div>
-<div class="top">
-<a tabindex="4" class="" href=""><img src="https://tcfshsu.github.io/law/i/icon/logo.png" alt="首頁" /></a>
-<form action="laws" method="get">
-<label for="lqc">類別：</label>
-<select tabindex="5" name="c" id="lqc">
-<option selected value="">不限</option>
-<option value="c">中央法規</option>
-<option value="ex">行政法規</option>
-<option value="l">立法法規</option>
-<option value="j">司法法規</option>
-<option value="el">選舉法規</option>
-</select>
-<label for="lql">位階：</label>
-<select tabindex="5" name="l" id="lql">
-<option selected value="">不限</option>
-<option value="章程">章程</option>
-<option value="法律">法律</option>
-<option value="命令">命令</option>
-</select>
-<p>
-<input tabindex="6" type="search" placeholder="輸入關鍵字以搜尋" name="q" value="">
-<input tabindex="7" type="submit" style="background-image:url(https://tcfshsu.github.io/law/i/icon/search_w.svg);width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;" value="" alt="搜尋！" />
-</p>
-</form>
-<div tabindex="8" onclick="const b=document.getElementsByTagName('nav')[0].className;document.getElementsByTagName('nav')[0].className=b?'':'collapse';if(b)this.getElementsByTagName('path')[0].setAttribute('d','M3 3L21 21M3 21L21 3');else this.getElementsByTagName('path')[0].setAttribute('d','M3 12L21 12M3 6L21 6M3 18L21 18');">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12L21 12M3 6L21 6M3 18L21 18" /></svg>
-</div>
-</div>
-<nav class="collapse">
-<ul>
-<li><a href="laws?c=c" tabindex="9">中央法規</a></li>
-<li><a href="laws?c=ex" tabindex="9">行政法規</a></li>
-<li><a href="laws?c=l" tabindex="9">立法法規</a></li>
-<li><a href="laws?c=j" tabindex="9">司法法規</a></li>
-<li><a href="laws?c=el" tabindex="9">選舉法規</a></li>
-<li><a href="cases" tabindex="9">判例查詢</a></li>
-<li><a href="parties" tabindex="9">政黨查詢</a></li>
-<li><a href="rel" tabindex="9">相關連結</a></li>
-</ul>
-</nav>
-</header>
-<div>
-<div id="top"></div>
-<main class="main">
-""" ; 
+			<!DOCTYPE html>
+			<html lang="zh-Hant-TW">
+			<head>
+			<meta charset="utf-8" />
+			<base href="/static/" />
+			<title>
+			""" + ( string.IsNullOrEmpty( pageTitle ) ? "" :$"{ pageTitle } - " ) + """
+			臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</title>
+			<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+			<meta name="author" content="louischo303@" />
+			<meta name="keywords" content="臺中市立臺中第一高級中等學校,臺中市立臺中第一高級中等學校學生自治聯合會,臺中一中學聯會,台中一中學聯會,中一中學聯會,一中學聯會,中一中學生會,一中學生會,自治部,臺中一中,台中一中,中一中,一中,一中學聯會,學聯會,法規,法規資料庫,學聯會法規,學生會,學生議會,學生政黨,政黨,組織章程,章程,三權分立,一讀,二讀,第一讀會,第二讀會,組織及職權行使法,職權行使法,議會監察使,會長,學生會會長,學生會長,學生議會議長,議長,評議委員會,評議委員會主任委員,主任委員,評委會,評委會主委,咨詢委員,咨委" />
+			<link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR:wght@200..900&family=IBM+Plex+Mono:wght@500&family=Noto+Sans+TC:wght@100..900&family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+SC:wght@100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Noto+Sans+Mono:wght@100..900&family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif+JP:wght@200..900&family=Noto+Serif+SC:wght@200..900&family=Noto			+Sans:wght@700&family=Noto+Serif+TC:wght@200..900&display=swap">
+			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/print.css" />
+			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/fonts.css" />
+			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/color.css" />
+			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/site.css" />
+			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/p.css" />
+			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/home.css" />
+			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/breadcrumb.css" />
+			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/app.css" />
+			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/law.css" />
+			<link rel="stylesheet" href="https://tcfshsu.github.io/law/css/darkmode.css" />
+			</head>
+			<body>
+			<style>
+			#lqc 
+			{
+			color : var( --header-bg ) ; 
+			background: linear-gradient(20deg, #fae0f7, #bd0f83);
+			border : 0 ; 
+			border-radius : 8.5px ; 
+			}
+			label[for="lqc"] 
+			{
+			display : none ; 
+			color : #fffad0 ; 
+			}
+			#lql , label[for="lql"] 
+			{
+			color : #ffc8d2 ; 
+			display : none ; 
+			}
+			#lql 
+			{
+			background: linear-gradient(20deg, #001d12, #a165fa);
+			border : 0 ; 
+			border-radius : 8.5px ; 
+			}
+			label[for="lql"] , label[for="lqc"] 
+			{
+			font-size : .8rem ; 
+			flex-shrink : 0 ; 
+			}
+			@media ( min-width : 768px ) 
+			{
+			#lql , label[for="lql"] , label[for="lqc"] 
+			{
+			display : inline-block ; 
+			}
+			}
+			</style>
+			<div>
+			<header>
+			<div class="top-guide">
+			<ul>
+			<li><a href="guide" tabindex="1">網站導覽</a></li>
+			<li id="zoom">
+			<span id="z_s" tabindex="1" style="font-size:13.6px;" onclick="document.documentElement.style.zoom='85%';this.className='Y';document.getElementById('z_m').className='';document.getElementById('z_l').className='';">A</span>
+			<span id="z_m" class="Y" tabindex="2" style="font-size:16px;" onclick="document.documentElement.style.zoom='100%';this.className='Y';document.getElementById('z_s').className='';document.getElementById('z_l').className='';">A</span>
+			<span id="z_l" tabindex="3" style="font-size:18.4px;" onclick="document.documentElement.style.zoom='115%';this.className='Y';document.getElementById('z_s').className='';document.getElementById('z_m').className='';">A</span>
+			</li>
+			</ul>
+			</div>
+			<div class="top">
+			<a tabindex="4" class="" href=""><img src="https://tcfshsu.github.io/law/i/icon/logo.png" alt="首頁" /></a>
+			<form action="laws" method="get">
+			<label for="lqc">類別：</label>
+			<select tabindex="5" name="c" id="lqc">
+			<option selected value="">不限</option>
+			<option value="c">中央法規</option>
+			<option value="ex">行政法規</option>
+			<option value="l">立法法規</option>
+			<option value="j">司法法規</option>
+			<option value="el">選舉法規</option>
+			</select>
+			<label for="lql">位階：</label>
+			<select tabindex="5" name="l" id="lql">
+			<option selected value="">不限</option>
+			<option value="章程">章程</option>
+			<option value="法律">法律</option>
+			<option value="命令">命令</option>
+			</select>
+			<p>
+			<input tabindex="6" type="search" placeholder="輸入關鍵字以搜尋" name="q" value="">
+			<input tabindex="7" type="submit" style="background-image:url(https://tcfshsu.github.io/law/i/icon/search_w.svg);width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;" value="" alt="搜尋！" />
+			</p>
+			</form>
+			<div tabindex="8" onclick="const b=document.getElementsByTagName('nav')[0].className;document.getElementsByTagName('nav')[0].className=b?'':'collapse';if(b)this.getElementsByTagName('path')[0].setAttribute('d','M3 3L21 21M3 21L21 3');else this.getElementsByTagName('path')[0].setAttribute('d','M3 12L21 12M3 6L21 6M3 18L21 18');">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12L21 12M3 6L21 6M3 18L21 18" /></svg>
+			</div>
+			</div>
+			<nav class="collapse">
+			<ul>
+			<li><a href="laws?c=c" tabindex="9">中央法規</a></li>
+			<li><a href="laws?c=ex" tabindex="9">行政法規</a></li>
+			<li><a href="laws?c=l" tabindex="9">立法法規</a></li>
+			<li><a href="laws?c=j" tabindex="9">司法法規</a></li>
+			<li><a href="laws?c=el" tabindex="9">選舉法規</a></li>
+			<li><a href="cases" tabindex="9">判例查詢</a></li>
+			<li><a href="parties" tabindex="9">政黨查詢</a></li>
+			<li><a href="rel" tabindex="9">相關連結</a></li>
+			</ul>
+			</nav>
+			</header>
+			<div>
+			<div id="top"></div>
+			<main class="main">
+		""" ; 
 	}
 	static void Main(string[] args)
 	{
@@ -247,54 +247,54 @@ display : inline-block ;
 		Regex nonch = new( @"[!-⬍⿰-㏿ﬓ-�\s]" ) ; 
 		string nos = "<noscript>您必須開啟JavaScript才能使用本站完整功能</noscript>" ; 
 		string foot = $$"""
-</main>
-<div class="toTop" tabindex="0" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})"><span>回最</span><span>上方</span></div>
-</div>
-<footer>
-<div class="footer-upper">
-<ul>
-<li><a href="laws?c=c" tabindex="9">中央法規</a></li>
-<li><a href="laws?c=ex" tabindex="9">行政法規</a></li>
-<li><a href="laws?c=l" tabindex="9">立法法規</a></li>
-<li><a href="laws?c=j" tabindex="9">司法法規</a></li>
-<li><a href="laws?c=el" tabindex="9">選舉法規</a></li>
-<li><a href="cases" tabindex="9">判例查詢</a></li>
-<li><a href="parties" tabindex="9">政黨查詢</a></li>
-<li><a href="rel" tabindex="9">相關連結</a></li>
-</ul>
-</div>
-<div class="footer-note">
-<ul>
-<li>本網站係提供法規之最新動態資訊及資料檢索，並不提供法規及法律諮詢之服務。</li>
-<li>若有任何法律上的疑義，建議您可逕向發布法規之主管機關洽詢。</li>
-<li>本網站法規資料係由各機關提供之電子檔或書面文字登打製作，若與各法規主管機關之公布文字有所不同，仍以各法規主管機關之公布資料為準。</li>
-<li>部分資料內容，使用特殊文字或符號，如欲詳閱內容，請連結至<a tabindex="0" href="https://www.cns11643.gov.tw/downloadList.jsp?ID=1" target="_blank">全字庫</a>下載造字檔或<a tabindex="0" href="https://data.gov.tw/dataset/5961" target="_blank">政府資料開放平臺</a>下載全字庫字形檔。</li>
-<li>建議使用<a href="https://www.google.com/intl/zh-TW/chrome/" target="_blank">Google Chrome</a>、<a href="https://brave.com/zh-tw/" target="_blank">Brave</a>或<a href="https://www.opera.com/" target="_blank">Opera</a>瀏覽本網頁；並建議使用電腦版<a href="https://www.google.com/intl/zh-TW/chrome/" target="_blank">Google Chrome</a>或<a href="https://brave.com/zh-tw/" target="_blank">Brave</a>列印。</li>
-<li>法規整編資料截止日：民國 {{ lty }} 年 {{ ltm }} 月 {{ ltd }} 日</li>
-<li>政黨整編資料截止日：民國 {{ pty }} 年 {{ ptm }} 月 {{ ptd }} 日</li>
-<li>判例整編資料截止日：民國 {{ cty }} 年 {{ ctm }} 月 {{ ctd }} 日</li>
-</ul>
-</div>
-<div class="footer-bottom">
-<ul>
-<li><a tabindex="0" href="open">資料開放宣告</a></li>
-<li><a tabindex="0" href="print">法規彙編列印</a></li>
-<li><a tabindex="0" href="s">統計</a></li>
-</ul>
-<span>本網站由臺中市立臺中第一高級中等學校學生自治聯合會學生會自治部及評議委員會共同維運管理</span><br/>
-<span><span>市立臺中一中學聯會辦公室地址：</span><span>404009臺中市北區育才街2號 敬業樓3樓</span></span><br/>
-<span>信箱：
-<ul>
-<li><span>學生會：</span><a tabindex="0" href="mailto:tcfshsa290801@gmail.com">tcfshsa290801@gmail.com</a></li>
-<li><span>學生議會：</span><a tabindex="0" href="mailto:tcfshsc101@gmail.com">tcfshsc101@gmail.com</a></li>
-<li><span>評議委員會：</span><a tabindex="0" href="mailto:tcfshstudentcourt@std.tcfsh.tc.edu.tw">tcfshstudentcourt@std.tcfsh.tc.edu.tw</a></li>
-</ul>
-</span>
-</div>
-</footer>
-</body>
-</html>
-""" ; 
+			</main>
+			<div class="toTop" tabindex="0" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})"><span>回最</span><span>上方</span></div>
+			</div>
+			<footer>
+			<div class="footer-upper">
+			<ul>
+			<li><a href="laws?c=c" tabindex="9">中央法規</a></li>
+			<li><a href="laws?c=ex" tabindex="9">行政法規</a></li>
+			<li><a href="laws?c=l" tabindex="9">立法法規</a></li>
+			<li><a href="laws?c=j" tabindex="9">司法法規</a></li>
+			<li><a href="laws?c=el" tabindex="9">選舉法規</a></li>
+			<li><a href="cases" tabindex="9">判例查詢</a></li>
+			<li><a href="parties" tabindex="9">政黨查詢</a></li>
+			<li><a href="rel" tabindex="9">相關連結</a></li>
+			</ul>
+			</div>
+			<div class="footer-note">
+			<ul>
+			<li>本網站係提供法規之最新動態資訊及資料檢索，並不提供法規及法律諮詢之服務。</li>
+			<li>若有任何法律上的疑義，建議您可逕向發布法規之主管機關洽詢。</li>
+			<li>本網站法規資料係由各機關提供之電子檔或書面文字登打製作，若與各法規主管機關之公布文字有所不同，仍以各法規主管機關之公布資料為準。</li>
+			<li>部分資料內容，使用特殊文字或符號，如欲詳閱內容，請連結至<a tabindex="0" href="https://www.cns11643.gov.tw/downloadList.jsp?ID=1" target="_blank">全字庫</a>下載造字檔或<a tabindex="0" href="https://data.gov.tw/dataset/5961" target="_blank">政府資料開放平臺</a>下載全字庫字形檔。</li>
+			<li>建議使用<a href="https://www.google.com/intl/zh-TW/chrome/" target="_blank">Google Chrome</a>、<a href="https://brave.com/zh-tw/" target="_blank">Brave</a>或<a href="https://www.opera.com/" target="_blank">Opera</a>瀏覽本網頁；並建議使用電腦版<a href="https://www.google.com/intl/zh-TW/chrome/" target="_blank">Google Chrome</a>或<a href="https://brave.com/zh-tw/" target="_blank">Brave</a>列印。</li>
+			<li>法規整編資料截止日：民國 {{ lty }} 年 {{ ltm }} 月 {{ ltd }} 日</li>
+			<li>政黨整編資料截止日：民國 {{ pty }} 年 {{ ptm }} 月 {{ ptd }} 日</li>
+			<li>判例整編資料截止日：民國 {{ cty }} 年 {{ ctm }} 月 {{ ctd }} 日</li>
+			</ul>
+			</div>
+			<div class="footer-bottom">
+			<ul>
+			<li><a tabindex="0" href="open">資料開放宣告</a></li>
+			<li><a tabindex="0" href="print">法規彙編列印</a></li>
+			<li><a tabindex="0" href="s">統計</a></li>
+			</ul>
+			<span>本網站由臺中市立臺中第一高級中等學校學生自治聯合會學生會自治部及評議委員會共同維運管理</span><br/>
+			<span><span>市立臺中一中學聯會辦公室地址：</span><span>404009臺中市北區育才街2號 敬業樓3樓</span></span><br/>
+			<span>信箱：
+			<ul>
+			<li><span>學生會：</span><a tabindex="0" href="mailto:tcfshsa290801@gmail.com">tcfshsa290801@gmail.com</a></li>
+			<li><span>學生議會：</span><a tabindex="0" href="mailto:tcfshsc101@gmail.com">tcfshsc101@gmail.com</a></li>
+			<li><span>評議委員會：</span><a tabindex="0" href="mailto:tcfshstudentcourt@std.tcfsh.tc.edu.tw">tcfshstudentcourt@std.tcfsh.tc.edu.tw</a></li>
+			</ul>
+			</span>
+			</div>
+			</footer>
+			</body>
+			</html>
+		""" ; 
 		using (StreamWriter o = File.AppendText("./html/index.html"))
 		{
 			o.WriteLine( Head( "首頁" ) ) ; 
@@ -337,6 +337,27 @@ display : inline-block ;
 			o.WriteLine( "</script>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
+		using (StreamWriter o = File.AppendText("./html/laws/lawe.html"))
+		{
+			o.WriteLine( Head( "" ) ) ; 
+			o.WriteLine( nos ) ; 
+			o.WriteLine( "<script>" ) ; 
+			o.WriteLine( "const qa =  window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
+			o.WriteLine( "let qq = Array() ; " ) ; 
+			o.WriteLine( "for( let q of qa ) " ) ; 
+			o.WriteLine( "{" ) ; 
+			o.WriteLine( "let temp = {} ; " ) ; 
+			o.WriteLine( "temp[q.split( '=' )[0]] = q.split( '=' )[1] ; " ) ; 
+			o.WriteLine( "qq.push( temp ) ; " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "const law = qq.filter( i => i.a )[0] ; " ) ; 
+			o.WriteLine( "if( law ) " ) ; 
+			o.WriteLine( "{" ) ; 
+			o.WriteLine( "window.location.replace( document.baseURI + \"laws/lawe/\" + law.a[0] + \"/\" + Number( law.a.substring(1) ) ) ; " ) ; 
+			o.WriteLine( "}" ) ; 
+			o.WriteLine( "</script>" ) ; 
+			o.WriteLine( foot ) ; 
+		}
 		foreach( var l in laws ) 
 		{
 			// Directory.CreateDirectory($"./{now}/laws" ) ; 
@@ -361,35 +382,35 @@ display : inline-block ;
 				o.WriteLine( Head( title.Replace( l.LawName , "" ) ) ) ; 
 				o.WriteLine( Bread( $"法規查詢:laws>{ l.LawName }" ) ) ; 
 				o.WriteLine( """
-<style>
-div[ahhhhaaaahaha] h6 :first-child 
-{
-flex-shrink : 1 ; 
-}
-div[ahhhhaaaahaha] h6 a 
-{
-display : flex ; 
-}
-div[ahhhhaaaahaha] h6 a :first-child 
-{
-flex-shrink : 0 ; 
-}
-div[ahhhhaaaahaha] a:hover , div[ahhhhaaaahaha] a:focus 
-{
-color : #c03 ; 
-text-decoration : none ; 
-}
-div[ahhhhaaaahaha] a , div[ahhhhaaaahaha] a:focus 
-{
-text-decoration : underline ; 
-}
-div[ahhhhaaaahaha] a:focus 
-{
-outline : .5px #fc0 solid ; 
-border-radius : 1px ; 
-}
-</style>
-""" ) ; 
+					<style>
+					div[ahhhhaaaahaha] h6 :first-child 
+					{
+					flex-shrink : 1 ; 
+					}
+					div[ahhhhaaaahaha] h6 a 
+					{
+					display : flex ; 
+					}
+					div[ahhhhaaaahaha] h6 a :first-child 
+					{
+					flex-shrink : 0 ; 
+					}
+					div[ahhhhaaaahaha] a:hover , div[ahhhhaaaahaha] a:focus 
+					{
+					color : #c03 ; 
+					text-decoration : none ; 
+					}
+					div[ahhhhaaaahaha] a , div[ahhhhaaaahaha] a:focus 
+					{
+					text-decoration : underline ; 
+					}
+					div[ahhhhaaaahaha] a:focus 
+					{
+					outline : .5px #fc0 solid ; 
+					border-radius : 1px ; 
+					}
+					</style>
+				""" ) ; 
 				o.WriteLine($"<a href=\"{ l.LawURL.Replace( "laws/law" , "laws/lawe" ) }&c=&q=&l=&ab=\" class=\"printNoDisplay\">") ; 
 				o.WriteLine( "簡讀版") ; 
 				o.WriteLine( "</a>") ; 
@@ -904,74 +925,74 @@ border-radius : 1px ;
 		{
 			o.WriteLine( Head( "網站導覽" ) ) ; 
 			o.WriteLine( """
-<style>
-#guide 
-{
-border-top : #0005 solid 2px ; 
-}
-#guide , #map 
-{
-padding-left : 1rem ; 
-}
-#guide ul 
-{
-padding-left : .5rem ; 
-}
-#guide ul li h3 
-{
-text-indent : -.5rem ; 
-}
-@media ( max-width : 768px ) 
-{
-#guide ul 
-{
-padding-left : 1rem ; 
-}
-}
-#map dt 
-{
-display : block ; 
-padding-left : 1rem ; 
-}
-#map dd 
-{
-display : block ; 
-padding-left : 2rem ; 
-}
-</style>
-""" ) ; 
+				<style>
+				#guide 
+				{
+				border-top : #0005 solid 2px ; 
+				}
+				#guide , #map 
+				{
+				padding-left : 1rem ; 
+				}
+				#guide ul 
+				{
+				padding-left : .5rem ; 
+				}
+				#guide ul li h3 
+				{
+				text-indent : -.5rem ; 
+				}
+				@media ( max-width : 768px ) 
+				{
+				#guide ul 
+				{
+				padding-left : 1rem ; 
+				}
+				}
+				#map dt 
+				{
+				display : block ; 
+				padding-left : 1rem ; 
+				}
+				#map dd 
+				{
+				display : block ; 
+				padding-left : 2rem ; 
+				}
+				</style>
+			""" ) ; 
 			o.WriteLine( Bread( "網站導覽" ) ) ; 
 			o.WriteLine( """
-<h1>網站導覽</h1>
-<div id="guide">
-<h2>使用說明</h2>
-<ul>
-<li>
-<h3>搜尋欄</h3>
-<span>於法規條文、沿革、名稱、前言（宗旨）及附件檔案名稱中搜尋關鍵字，可以空格分隔多個關鍵字。</span>
-</li>
-</ul>
-</div>
-<div id="map">
-<h2>網站地圖</h2>
-<dl>
-<dt><a href="laws">法規查詢</a></dt>
-<dd><a href="laws?c=c">中央法規</a></dd>
-<dd><a href="laws?c=ex">行政法規</a></dd>
-<dd><a href="laws?c=l">立法法規</a></dd>
-<dd><a href="laws?c=j">司法法規</a></dd>
-<dd><a href="laws?c=el">選舉法規（含中央、行政及立法之選舉法規）</a></dd>
-<dt><a href="cases">判例查詢</a></dt>
-<dt><a href="parties">政黨查詢</a></dt>
-<dt><a href="print">法規彙編（列印）</a></dt>
-<dt><a href="s">統計</a></dt>
-<dt><a href="rel">相關連結</a></dt>
-<dt><a href="open">資料開放宣告</a></dt>
-</dl>
-</div>
-<br class="printNoDisplay" />
-<a class="printNoDisplay" href="">回首頁</a>
-""" ) ; 
+				<h1>網站導覽</h1>
+				<div id="guide">
+				<h2>使用說明</h2>
+				<ul>
+				<li>
+				<h3>搜尋欄</h3>
+				<span>於法規條文、沿革、名稱、前言（宗旨）及附件檔案名稱中搜尋關鍵字，可以空格分隔多個關鍵字。</span>
+				</li>
+				</ul>
+				</div>
+				<div id="map">
+				<h2>網站地圖</h2>
+				<dl>
+				<dt><a href="laws">法規查詢</a></dt>
+				<dd><a href="laws?c=c">中央法規</a></dd>
+				<dd><a href="laws?c=ex">行政法規</a></dd>
+				<dd><a href="laws?c=l">立法法規</a></dd>
+				<dd><a href="laws?c=j">司法法規</a></dd>
+				<dd><a href="laws?c=el">選舉法規（含中央、行政及立法之選舉法規）</a></dd>
+				<dt><a href="cases">判例查詢</a></dt>
+				<dt><a href="parties">政黨查詢</a></dt>
+				<dt><a href="print">法規彙編（列印）</a></dt>
+				<dt><a href="s">統計</a></dt>
+				<dt><a href="rel">相關連結</a></dt>
+				<dt><a href="open">資料開放宣告</a></dt>
+				</dl>
+				</div>
+				<br class="printNoDisplay" />
+				<a class="printNoDisplay" href="">回首頁</a>
+			""" ) ; 
 			o.WriteLine( foot ) ; 
 		}
 		using (StreamWriter o = File.AppendText("./html/open.html"))
@@ -1026,502 +1047,502 @@ padding-left : 2rem ;
 			o.WriteLine( Head( "相關連結" ) ) ; 
 			o.WriteLine( Bread( "相關連結" ) ) ; 
 			o.WriteLine( """
-<div class="rel">
-<div class="tcfsh"><h1><a target="_blank" href="https://tcfsh.tc.edu.tw/">臺中市立臺中第一高級中等學校</a></h1></div>
-<h2><a target="_blank" href="https://sites.google.com/view/tcfshsu/">臺中市立臺中第一高級中等學校學生自治聯合會</a></h2>
-<h3>
-<a target="_blank" href="https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=H0060043&flno=53">學聯會設立之法源
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</h3>
-<div class="tcfshsu">
-<div class="tcfshsa">
-<ul>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會">學生會
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<ul>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/秘書處">秘書處
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/學生會各部會/公活部">公活部
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/學生會各部會/自治部">自治部
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/學生會各部會/學權部">學權部
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/學生會各部會/新聞部">新聞部
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/學生會各部會/美宣部">美宣部
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/學生會各部會/財政部">財政部
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-</ul>
-<li>
-<a target="_blank" href="https://drive.google.com/drive/folders/1Erz6Ns45xVTRNS76Cs_zjDiOCkMczLVP?usp=sharing">學生會資訊公開處
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://drive.google.com/drive/folders/186e7R1iAIiXKyu4nDJ5399llufd4bRHq">會長令
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生申訴陳情">學生申訴陳情
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://www.facebook.com/TCFSH.SA">學生會官方facebook
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://www.instagram.com/tcfsh.sa/">學生會官方Instagram
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-</ul>
-</div>
-<div class="tcfshsc">
-<ul>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會">學生議會
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會組織/常務委員會">學生議會常務委員會
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會組織/各委員會">學生議會各委員會
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會組織/各處室/秘書處">學生議會秘書處
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會組織/各處室/審計處">學生議會審計處
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會組織/各處室/法制處">學生議會法制處
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會監察使">議會監察使
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會監察使/會員友善專區">議會監察使 > 會員友善專區
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會監察使/會員救濟專區">議會監察使 > 會員救濟專區
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://www.facebook.com/tcfshstudentcouncil">學生議會官方facebook
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://www.instagram.com/tcfsh.sc/">學生議會官方Instagram
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://youtube.com/channel/UClNJh-xl_sb0eoYwFoGnVew?si=CXsY33Y9ZseR8KRY">學生議會官方YouTube
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-</ul>
-</div>
-<div class="tcfshsrc">
-<ul>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/評議委員會">評議委員會
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/評議委員會/評議委員">評議委員
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/評議委員會/評議委員會秘書處">評議委員會秘書處
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/評議委員會/案件聲請">案件聲請
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<ul>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83/%E6%A1%88%E4%BB%B6%E8%81%B2%E8%AB%8B#h.8loft3lrfg3">線上起訴
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83/%E6%A1%88%E4%BB%B6%E8%81%B2%E8%AB%8B#h.xtfes2nuhps">書狀範例
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-</ul>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/評議委員會/評議委員會資訊公開處">評議委員會資訊公開處
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<ul>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83%E8%B3%87%E8%A8%8A%E5%85%AC%E9%96%8B%E8%99%95#h.u8k45ibhhdtj">公文
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://drive.google.com/drive/folders/1wCVyBrAjxW0_4H7e36d4oyZV-o387v4y">歷屆公文
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83%E8%B3%87%E8%A8%8A%E5%85%AC%E9%96%8B%E8%99%95#h.7npdv84zq5oz">評議委員會議公開
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-</ul>
-<li>
-<a target="_blank" href="https://www.facebook.com/tcfsh.studentcourt">評議委員會官方facebook
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://www.instagram.com/tcfsh.src/">評議委員會官方Instagram
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-</ul>
-</div>
-<div class="tcfshsa-indie">
-<ul>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/獨立機關">學生會各獨立機關
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/獨立機關/學生會選舉委員會">學生會選舉委員會
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://www.facebook.com/tcfsh.election.commission">學生會選舉委員會官方facebook
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://www.instagram.com/tcfsh.sec/">學生會選舉委員會官方Instagram
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://www.youtube.com/%40tcfshsec">學生會選舉委員會官方YouTube
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/獨立機關/學生會畢業生聯合會">學生會畢業生聯合會
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-<li>
-<a target="_blank" href="https://www.instagram.com/tcfshgcpt_87th/">學生會畢業生聯合會官方Instagram
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-</ul>
-</div>
-<div class="lawall">
-<h2>法規彙編下載</h2>
-<ul>
-<li><a href="print">本網站（列印）</a></li>
-<li>
-<a target="_blank" href="https://sites.google.com/view/tcfshsu/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83%E8%B3%87%E8%A8%8A%E5%85%AC%E9%96%8B%E8%99%95#h.1nevsowitfq">評議委員會
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" y1="14" x2="21" y2="3"></line>
-</svg>
-</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<a class="printNoDisplay" href="">回首頁</a>
-""" ) ; 
+				<div class="rel">
+				<div class="tcfsh"><h1><a target="_blank" href="https://tcfsh.tc.edu.tw/">臺中市立臺中第一高級中等學校</a></h1></div>
+				<h2><a target="_blank" href="https://sites.google.com/view/tcfshsu/">臺中市立臺中第一高級中等學校學生自治聯合會</a></h2>
+				<h3>
+				<a target="_blank" href="https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=H0060043&flno=53">學聯會設立之法源
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</h3>
+				<div class="tcfshsu">
+				<div class="tcfshsa">
+				<ul>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會">學生會
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<ul>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/秘書處">秘書處
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/學生會各部會/公活部">公活部
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/學生會各部會/自治部">自治部
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/學生會各部會/學權部">學權部
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/學生會各部會/新聞部">新聞部
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/學生會各部會/美宣部">美宣部
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/學生會各部會/財政部">財政部
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				</ul>
+				<li>
+				<a target="_blank" href="https://drive.google.com/drive/folders/1Erz6Ns45xVTRNS76Cs_zjDiOCkMczLVP?usp=sharing">學生會資訊公開處
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://drive.google.com/drive/folders/186e7R1iAIiXKyu4nDJ5399llufd4bRHq">會長令
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生申訴陳情">學生申訴陳情
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://www.facebook.com/TCFSH.SA">學生會官方facebook
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://www.instagram.com/tcfsh.sa/">學生會官方Instagram
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				</ul>
+				</div>
+				<div class="tcfshsc">
+				<ul>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會">學生議會
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會組織/常務委員會">學生議會常務委員會
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會組織/各委員會">學生議會各委員會
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會組織/各處室/秘書處">學生議會秘書處
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會組織/各處室/審計處">學生議會審計處
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會組織/各處室/法制處">學生議會法制處
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會監察使">議會監察使
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會監察使/會員友善專區">議會監察使 > 會員友善專區
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會監察使/會員救濟專區">議會監察使 > 會員救濟專區
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://www.facebook.com/tcfshstudentcouncil">學生議會官方facebook
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://www.instagram.com/tcfsh.sc/">學生議會官方Instagram
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://youtube.com/channel/UClNJh-xl_sb0eoYwFoGnVew?si=CXsY33Y9ZseR8KRY">學生議會官方YouTube
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				</ul>
+				</div>
+				<div class="tcfshsrc">
+				<ul>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/評議委員會">評議委員會
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/評議委員會/評議委員">評議委員
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/評議委員會/評議委員會秘書處">評議委員會秘書處
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/評議委員會/案件聲請">案件聲請
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<ul>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83/%E6%A1%88%E4%BB%B6%E8%81%B2%E8%AB%8B#h.8loft3lrfg3">線上起訴
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83/%E6%A1%88%E4%BB%B6%E8%81%B2%E8%AB%8B#h.xtfes2nuhps">書狀範例
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				</ul>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/評議委員會/評議委員會資訊公開處">評議委員會資訊公開處
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<ul>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83%E8%B3%87%E8%A8%8A%E5%85%AC%E9%96%8B%E8%99%95#h.u8k45ibhhdtj">公文
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://drive.google.com/drive/folders/1wCVyBrAjxW0_4H7e36d4oyZV-o387v4y">歷屆公文
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83%E8%B3%87%E8%A8%8A%E5%85%AC%E9%96%8B%E8%99%95#h.7npdv84zq5oz">評議委員會議公開
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				</ul>
+				<li>
+				<a target="_blank" href="https://www.facebook.com/tcfsh.studentcourt">評議委員會官方facebook
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://www.instagram.com/tcfsh.src/">評議委員會官方Instagram
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				</ul>
+				</div>
+				<div class="tcfshsa-indie">
+				<ul>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/獨立機關">學生會各獨立機關
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/獨立機關/學生會選舉委員會">學生會選舉委員會
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://www.facebook.com/tcfsh.election.commission">學生會選舉委員會官方facebook
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://www.instagram.com/tcfsh.sec/">學生會選舉委員會官方Instagram
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://www.youtube.com/%40tcfshsec">學生會選舉委員會官方YouTube
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生會/獨立機關/學生會畢業生聯合會">學生會畢業生聯合會
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				<li>
+				<a target="_blank" href="https://www.instagram.com/tcfshgcpt_87th/">學生會畢業生聯合會官方Instagram
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				</ul>
+				</div>
+				<div class="lawall">
+				<h2>法規彙編下載</h2>
+				<ul>
+				<li><a href="print">本網站（列印）</a></li>
+				<li>
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83/%E8%A9%95%E8%AD%B0%E5%A7%94%E5%93%A1%E6%9C%83%E8%B3%87%E8%A8%8A%E5%85%AC%E9%96%8B%E8%99%95#h.1nevsowitfq">評議委員會
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+				<polyline points="15 3 21 3 21 9"></polyline>
+				<line x1="10" y1="14" x2="21" y2="3"></line>
+				</svg>
+				</a>
+				</li>
+				</ul>
+				</div>
+				</div>
+				</div>
+				<a class="printNoDisplay" href="">回首頁</a>
+			""" ) ; 
 			o.WriteLine( foot ) ; 
 		}
 		using (StreamWriter o = File.AppendText("./html/s.html"))
@@ -1529,33 +1550,33 @@ stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
 			o.WriteLine( Head( "統計" ) ) ; 
 			o.WriteLine( Bread( "統計" ) ) ; 
 			o.WriteLine( """
-<style>
-.statistics_table 
-{
-border : 1px #000 solid ; 
-}
-.statistics_table tr 
-{
-border-bottom : 1px #000 solid ; 
-}
-.statistics_table th , .statistics_table td 
-{
-border-right : 1px #000 solid ; 
-}
-</style>
-<h1>統計</h1>
-<h3>法規</h3>
-<table class="statistics_table">
-<thead style="font-family:'IBM Plex Mono', 'Sonti TC' , '標點' , 'Noto Serif KR' , 'Noto Serif TC' , 'Noto Serif JP' , 'Noto Serif SC' , sans-serif;">
-<tr>
-<th>字</th>
-<th>unicode</th>
-<th>出現次數</th>
-<th>占比( ‰ )</th>
-</tr>
-</thead>
-<tbody style="font-family:'Fira Code', 'Sonti TC' , '標點' , 'Noto Serif KR' , 'Noto Serif TC' , 'Noto Serif JP' , 'Noto Serif SC' , sans-serif;">
-""" ) ; 
+				<style>
+				.statistics_table 
+				{
+				border : 1px #000 solid ; 
+				}
+				.statistics_table tr 
+				{
+				border-bottom : 1px #000 solid ; 
+				}
+				.statistics_table th , .statistics_table td 
+				{
+				border-right : 1px #000 solid ; 
+				}
+				</style>
+				<h1>統計</h1>
+				<h3>法規</h3>
+				<table class="statistics_table">
+				<thead style="font-family:'IBM Plex Mono', 'Sonti TC' , '標點' , 'Noto Serif KR' , 'Noto Serif TC' , 'Noto Serif JP' , 'Noto Serif SC' , sans-serif;">
+				<tr>
+				<th>字</th>
+				<th>unicode</th>
+				<th>出現次數</th>
+				<th>占比( ‰ )</th>
+				</tr>
+				</thead>
+				<tbody style="font-family:'Fira Code', 'Sonti TC' , '標點' , 'Noto Serif KR' , 'Noto Serif TC' , 'Noto Serif JP' , 'Noto Serif SC' , sans-serif;">
+			""" ) ; 
 			string jj = nonch.Replace( json , "" ) ; 
 			int wc = jj.Length ; 
 			List<Result> lre = [] ; 
@@ -1590,21 +1611,21 @@ border-right : 1px #000 solid ;
 			}
 			o.WriteLine( "" ) ; 
 			o.WriteLine( """
-</tbody>
-</table>
-<br />
-<br />
-<h3>判例</h3>
-<table class="statistics_table">
-<thead style="font-family:'IBM Plex Mono', 'Sonti TC' , '標點' , 'Noto Serif KR' , 'Noto Serif TC' , 'Noto Serif JP' , 'Noto Serif SC' , sans-serif;">
-<tr>
-<th>字</th>
-<th>unicode</th>
-<th>出現次數</th>
-</tr>
-</thead>
-<tbody style="font-family:'Fira Code', 'Sonti TC' , '標點' , 'Noto Serif KR' , 'Noto Serif TC' , 'Noto Serif JP' , 'Noto Serif SC' , sans-serif;">
-""" ) ; 
+				</tbody>
+				</table>
+				<br />
+				<br />
+				<h3>判例</h3>
+				<table class="statistics_table">
+				<thead style="font-family:'IBM Plex Mono', 'Sonti TC' , '標點' , 'Noto Serif KR' , 'Noto Serif TC' , 'Noto Serif JP' , 'Noto Serif SC' , sans-serif;">
+				<tr>
+				<th>字</th>
+				<th>unicode</th>
+				<th>出現次數</th>
+				</tr>
+				</thead>
+				<tbody style="font-family:'Fira Code', 'Sonti TC' , '標點' , 'Noto Serif KR' , 'Noto Serif TC' , 'Noto Serif JP' , 'Noto Serif SC' , sans-serif;">
+			""" ) ; 
 			string cc = nonch.Replace( cjson , "" ) ; 
 			List<Result> cre = [] ; 
 			for( int i = 0 ; i < cc.Length ; ++ i ) 
@@ -1632,10 +1653,8 @@ border-right : 1px #000 solid ;
 				o.WriteLine( "</td>" ) ; 
 				o.WriteLine( "</tr>" ) ; 
 			}
-			o.WriteLine( """
-</tbody>
-</table>
-""" ) ; 
+			o.WriteLine( "</tbody>" ) ; 
+			o.WriteLine( "</table>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
 		using (StreamWriter o = File.AppendText("./html/latest.html"))
@@ -1792,6 +1811,48 @@ border-right : 1px #000 solid ;
 		{
 			o.WriteLine( Head( "政黨查詢" ) ) ; 
 			o.WriteLine( Bread( "政黨查詢" ) ) ; 
+			o.WriteLine( "<form action=\"parties\" method=\"get\" class=\"pq printNoDisplay\">" ) ; 
+			o.WriteLine( "<label for=\"s\">狀態：</label>" ) ; 
+			o.WriteLine( "<select name=\"s\" id=\"s\">" ) ; 
+			o.WriteLine( "<option value=\"\">不限</option>" ) ; 
+			o.WriteLine( "<option value=\"一般\">一般</option>" ) ; 
+			o.WriteLine( "<!-- <option value=\"廢止備案\">廢止備案</option> -->" ) ; 
+			o.WriteLine( "<!-- <option value=\"自行解散\">自行解散</option> -->" ) ; 
+			o.WriteLine( "</select>" ) ; 
+			o.WriteLine( "<p>" ) ; 
+			o.WriteLine( "<input type=\"search\" placeholder=\"輸入關鍵字以搜尋政黨\" name=\"q\" value=\"\" />" ) ; 
+			o.WriteLine( "<input type=\"submit\" style=\"background-image:url('https://tcfshsu.github.io/law/i/icon/search.svg');width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;\" value=\"\" alt=\"搜尋！\" />" ) ; 
+			o.WriteLine( "</p>" ) ; 
+			o.WriteLine( "</form>" ) ; 
+			o.WriteLine( "<table class=\"p\">" ) ; 
+			o.WriteLine( "<thead>" ) ; 
+			o.WriteLine( "<tr>" ) ; 
+			o.WriteLine( "<th>編號</th>" ) ; 
+			o.WriteLine( "<th>政黨名稱</th>" ) ; 
+			o.WriteLine( "<th>負責人</th>" ) ; 
+			o.WriteLine( "</tr>" ) ; 
+			o.WriteLine( "</thead>" ) ; 
+			o.WriteLine( "<tbody>" ) ; 
+			foreach( var aptr in parties ) 
+			{
+				o.WriteLine( "<tr>" ) ; 
+				o.WriteLine( "<td>" ) ; 
+				o.WriteLine($"<a href=\"parties/detail?party={ aptr.Party }&q=&s=\">" ) ; 
+				o.WriteLine( aptr.Party ) ; 
+				o.WriteLine( "</a>" ) ; 
+				o.WriteLine( "</td>" ) ; 
+				o.WriteLine( "<td>" ) ; 
+				o.WriteLine($"<a href=\"parties/detail?party={ aptr.Party }&q=&s=\">" ) ; 
+				o.WriteLine( aptr.PartyName ) ; 
+				o.WriteLine( "</a>" ) ; 
+				o.WriteLine( "</td>" ) ; 
+				o.WriteLine( "<td>" ) ; 
+				o.WriteLine( aptr.Chairman ) ; 
+				o.WriteLine( "</td>" ) ; 
+				o.WriteLine( "</tr>" ) ; 
+			}
+			o.WriteLine( "</tbody>" ) ; 
+			o.WriteLine( "</table>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
 		using (StreamWriter o = File.AppendText("./html/parties/detail.html"))
