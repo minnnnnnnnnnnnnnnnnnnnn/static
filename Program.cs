@@ -1989,6 +1989,48 @@ class Program
 			o.WriteLine( "<input type=\"submit\" style=\"background-image:url('https://tcfshsu.github.io/law/i/icon/search.svg');width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;\" value=\"\" alt=\"搜尋！\" />" ) ; 
 			o.WriteLine( "</p>" ) ; 
 			o.WriteLine( "</form>" ) ; 
+			o.WriteLine( "<table class=\"c\">" ) ; 
+			o.WriteLine( "<thead>" ) ; 
+			o.WriteLine( "<tr>" ) ; 
+			o.WriteLine( "<th>" ) ; 
+			o.WriteLine( "判決字號" ) ; 
+			o.WriteLine( "</th>" ) ; 
+			o.WriteLine( "<th>" ) ; 
+			o.WriteLine( "類別" ) ; 
+			o.WriteLine( "</th>" ) ; 
+			o.WriteLine( "<th>" ) ; 
+			o.WriteLine( "標題或案由" ) ; 
+			o.WriteLine( "</th>" ) ; 
+			o.WriteLine( "</tr>" ) ; 
+			o.WriteLine( "</thead>" ) ; 
+			o.WriteLine( "<tbody>" ) ; 
+			foreach( var cas in cases ) 
+			{
+			o.WriteLine( "<tr>" ) ; 
+			o.WriteLine( "<td>" ) ; 
+			o.WriteLine($"<a href=\"cases/detail?case={ cas.No }&q=\" target=\"_self\">" ) ; 
+			o.WriteLine( cas.No ) ; 
+			o.WriteLine( "</a>" ) ; 
+			o.WriteLine( "</td>" ) ; 
+			o.WriteLine( "<td>" ) ; 
+			o.WriteLine( cas.Category ) ; 
+			o.WriteLine( "</td>" ) ; 
+			if( !string.IsNullOrEmpty( cas.Title ) ) 
+			{
+			o.WriteLine( "<td>" ) ; 
+			o.WriteLine( cas.Title ) ; 
+			o.WriteLine( "</td>" ) ; 
+			}
+			else 
+			{
+			o.WriteLine( "<td>" ) ; 
+			o.WriteLine( cas.Cause ) ; 
+			o.WriteLine( "</td>" ) ; 
+			}
+			o.WriteLine( "</tr>" ) ; 
+			}
+			o.WriteLine( "</tbody>" ) ; 
+			o.WriteLine( "</table>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
 		using (StreamWriter o = File.AppendText("./html/cases/detail.html"))
