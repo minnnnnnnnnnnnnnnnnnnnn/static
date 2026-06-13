@@ -222,6 +222,7 @@ class Program
 		Directory.CreateDirectory("html/parties/detail");
 		File.Delete( "./html/index.html" ) ; 
 		File.Delete( "./html/guide.html" ) ; 
+		File.Delete( "./html/laws.html" ) ; 
 		File.Delete( "./html/latest.html" ) ; 
 		File.Delete( "./html/print.html" ) ; 
 		File.Delete( "./html/open.html" ) ; 
@@ -318,12 +319,34 @@ class Program
 			o.WriteLine( "</div>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
+		using (StreamWriter o = File.AppendText("./html/laws.html"))
+		{
+			o.WriteLine( Head( "法規查詢" ) ) ; 
+			o.WriteLine( Bread( "法規查詢" ) ) ; 
+			o.WriteLine( nos ) ; 
+			o.WriteLine( "<script>" ) ; 
+			o.WriteLine( "const qa = window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
+			o.WriteLine( "let qq = Array() ; " ) ; 
+			o.WriteLine( "for( let q of qa ) " ) ; 
+			o.WriteLine( "{" ) ; 
+			o.WriteLine( "let temp = {} ; " ) ; 
+			o.WriteLine( "temp[q.split( '=' )[0]] = q.split( '=' )[1] ; " ) ; 
+			o.WriteLine( "qq.push( temp ) ; " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "const q = qq.filter( i => i.q )[0] ; " ) ; 
+			o.WriteLine( "if( q ) " ) ; 
+			o.WriteLine( "{" ) ; 
+			o.WriteLine( "console.log(q.q);" ) ; 
+			o.WriteLine( "}" ) ; 
+			o.WriteLine( "</script>" ) ; 
+			o.WriteLine( foot ) ; 
+		}
 		using (StreamWriter o = File.AppendText("./html/laws/law.html"))
 		{
 			o.WriteLine( Head( "" ) ) ; 
 			o.WriteLine( nos ) ; 
 			o.WriteLine( "<script>" ) ; 
-			o.WriteLine( "const qa =  window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
+			o.WriteLine( "const qa = window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
 			o.WriteLine( "let qq = Array() ; " ) ; 
 			o.WriteLine( "for( let q of qa ) " ) ; 
 			o.WriteLine( "{" ) ; 
@@ -344,7 +367,7 @@ class Program
 			o.WriteLine( Head( "" ) ) ; 
 			o.WriteLine( nos ) ; 
 			o.WriteLine( "<script>" ) ; 
-			o.WriteLine( "const qa =  window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
+			o.WriteLine( "const qa = window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
 			o.WriteLine( "let qq = Array() ; " ) ; 
 			o.WriteLine( "for( let q of qa ) " ) ; 
 			o.WriteLine( "{" ) ; 
@@ -1222,7 +1245,7 @@ class Program
 				</a>
 				</li>
 				<li>
-				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會組織/各委員會">學生議會各委員會
+				<a target="_blank" href="https://sites.google.com/view/tcfshsu/學生議會/議會組織/常設委員會">學生議會常設委員會
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
 				stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
 				<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -1664,7 +1687,7 @@ class Program
 			o.WriteLine( Head( "最新消息" ) ) ; 
 			o.WriteLine( nos ) ; 
 			o.WriteLine( "<script>" ) ; 
-			o.WriteLine( "const qa =  window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
+			o.WriteLine( "const qa = window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
 			o.WriteLine( "let qq = Array() ; " ) ; 
 			o.WriteLine( "for( let q of qa ) " ) ; 
 			o.WriteLine( "{" ) ; 
@@ -1862,7 +1885,7 @@ class Program
 			o.WriteLine( Head( "" ) ) ; 
 			o.WriteLine( nos ) ; 
 			o.WriteLine( "<script>" ) ; 
-			o.WriteLine( "const qa =  window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
+			o.WriteLine( "const qa = window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
 			o.WriteLine( "let qq = Array() ; " ) ; 
 			o.WriteLine( "for( let q of qa ) " ) ; 
 			o.WriteLine( "{" ) ; 
@@ -2040,7 +2063,7 @@ class Program
 			o.WriteLine( Head( "" ) ) ; 
 			o.WriteLine( nos ) ; 
 			o.WriteLine( "<script>" ) ; 
-			o.WriteLine( "const qa =  window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
+			o.WriteLine( "const qa = window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
 			o.WriteLine( "let qq = Array() ; " ) ; 
 			o.WriteLine( "for( let q of qa ) " ) ; 
 			o.WriteLine( "{" ) ; 
