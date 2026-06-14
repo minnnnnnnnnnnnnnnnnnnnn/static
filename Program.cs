@@ -3,7 +3,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
-class Program
+partial class Program
 {
 	private static string Bread( string paths ) 
 	{
@@ -169,7 +169,7 @@ class Program
 		<main class="main">
 		""" ; 
 	}
-	static void Main(string[] args)
+	static void Main()
 	{
 		string json = File.ReadAllText( "./json/laws.json" ) ;
 		string pjson = File.ReadAllText( "./json/parties.json" ) ;
@@ -240,12 +240,6 @@ class Program
 		ltd = lr[0].UpdateDate.Split('/')[2];
 		ptd = pr[0].UpdateDate.Split('/')[2];
 		ctd = cr[0].UpdateDate.Split('/')[2];
-		Regex title = new( "^臺中市立臺中第一高級中等學校學生自治聯合會|^臺中第一高級中學" ) ; 
-		// Regex artno = new( "^第[]條" ) ; 
-		Regex begsp = new( "^\\s*" ) ; 
-		Regex cap = new( "^\\s*第\\s*[一二三四五六七八九十]+\\s*[編章節款目]{1}\\s*" ) ; 
-		Regex para = new( @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E|（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）|（[1-9]{1}[0-9]+）|（[1-9]{1}）|（[１-９]{1}[０-９]+）|（[１-９]{1}）|[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" ) ; 
-		Regex nonch = new( @"[!-⬍⿰-㏿ﬓ-�\s]" ) ; 
 		string nos = "<noscript>您必須開啟JavaScript才能使用本站完整功能</noscript>" ; 
 		string foot = $$"""
 			</main>
@@ -457,7 +451,7 @@ class Program
 				o.WriteLine( "修正日期：" ) ; 
 				o.WriteLine( "</span>" ) ; 
 				o.WriteLine( "<span>" ) ; 
-				o.WriteLine($"民國 { ( int.Parse( l.LawModifiedDate ) / 10000 ) - 1911 } 年 { ( int.Parse( l.LawModifiedDate ) % 10000 / 100 ).ToString("D2") } 月 { ( int.Parse( l.LawModifiedDate ) % 100 ).ToString("D2") } 日" ) ; 
+				o.WriteLine($"民國 { ( int.Parse( l.LawModifiedDate ) / 10000 ) - 1911 } 年 {int.Parse( l.LawModifiedDate ) % 10000 / 100:D2} 月 {int.Parse( l.LawModifiedDate ) % 100:D2} 日" ) ; 
 				o.WriteLine( "</span>" ) ; 
 				o.WriteLine( "</li>" ) ; 
 				o.WriteLine( "<li>" ) ; 
@@ -518,7 +512,7 @@ class Program
 				o.WriteLine( "<ol>" ) ; 
 				foreach( var lti in l.LawArticles.Where( a => a.ArticleType == "C" ) ) 
 				{
-					o.WriteLine($"<li onclick=\"document.getElementById('{ Regex.Replace( lti.ArticleContent , "\\s" , "" ) }').scrollIntoView({{behavior:'smooth'}})\">" ) ; 
+					o.WriteLine($"<li onclick=\"document.getElementById('{ hassp.Replace( lti.ArticleContent , "" ) }').scrollIntoView({{behavior:'smooth'}})\">" ) ; 
 					o.WriteLine($"<h{ begsp.Match( lti.ArticleContent ).Length / 3 + 1 }>" ) ; 
 					o.WriteLine( lti.ArticleContent ) ; 
 					o.WriteLine($"</h{ begsp.Match( lti.ArticleContent ).Length / 3 + 1 }>" ) ; 
@@ -553,7 +547,7 @@ class Program
 					if( a.ArticleType == "C" ) 
 					{
 						int hi = begsp.Match( a.ArticleContent ).Length / 3 + 1 ; 
-						o.WriteLine($"<h{ hi } id=\"{ Regex.Replace( a.ArticleContent , "\\s" , "" ) }\">" ) ; 
+						o.WriteLine($"<h{ hi } id=\"{ hassp.Replace( a.ArticleContent , "" ) }\">" ) ; 
 						o.WriteLine( "<pre>" ) ; 
 						o.WriteLine( cap.Match( a.ArticleContent ) ) ; 
 						o.WriteLine( "</pre>" ) ; 
@@ -667,7 +661,7 @@ class Program
 					if( a.ArticleType == "C" ) 
 					{
 						int hi = begsp.Match( a.ArticleContent ).Length / 3 + 1 ; 
-						o.WriteLine($"<h{ hi } id=\"{ Regex.Replace( a.ArticleContent , "\\s" , "" ) }\">" ) ; 
+						o.WriteLine($"<h{ hi } id=\"{ hassp.Replace( a.ArticleContent ,"" ) }\">" ) ; 
 						o.WriteLine( "<pre>" ) ; 
 						o.WriteLine( cap.Match( a.ArticleContent ) ) ; 
 						o.WriteLine( "</pre>" ) ; 
@@ -749,7 +743,7 @@ class Program
 			o.WriteLine( "</small>" ) ; 
 			o.WriteLine( "<br />" ) ; 
 			o.WriteLine( "</span>" ) ; 
-			L[][] law_by_c = [ laws.Where( l => !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "中央法規" ) ).ToArray() , laws.Where( l => !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "行政法規" ) ).ToArray() , laws.Where( l => !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "立法法規" ) ).ToArray() , laws.Where( l => !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "司法法規" ) ).ToArray() , laws.Where(l=>l.LawCategory.Contains("選舉法規")).ToArray() ] ; 
+			L[][] law_by_c = [ [..laws.Where( l => !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "中央法規" ) )] , [..laws.Where( l => !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "行政法規" ) )] , [..laws.Where( l => !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "立法法規" ) )] , [..laws.Where( l => !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "司法法規" ) )] , [..laws.Where(l=>l.LawCategory.Contains("選舉法規"))] ] ; 
 			int iii = 0 ;
 			o.WriteLine( "<span>" ) ; 
 			o.WriteLine( "<span class=\"title\">" ) ; 
@@ -1706,7 +1700,7 @@ class Program
 		{
 			// File.Copy($"./html/latest/{ la.No }.html" ,$"./{ now }/latest/{ la.No }.html" , true ) ;
 			File.Delete($"./html/latest/{ la.No }.html") ; 
-			using (StreamWriter o = File.AppendText($"./html/latest/{ la.No }.html")) 
+			using StreamWriter o = File.AppendText($"./html/latest/{ la.No }.html"); 
 			{
 				o.WriteLine( Head( "最新消息" ) ) ; 
 				o.WriteLine( Bread( "最新消息" ) ) ; 
@@ -1902,7 +1896,7 @@ class Program
 		foreach( var p in parties ) 
 		{
 			File.Delete($"./html/parties/detail/{ p.Party }.html" ) ; 
-			using (StreamWriter o = File.AppendText($"./html/parties/detail/{ p.Party }.html" ))
+			using StreamWriter o = File.AppendText($"./html/parties/detail/{ p.Party }.html" );
 			{
 				o.WriteLine( Head( p.PartyName ) ) ; 
 				o.WriteLine( Bread( "政黨查詢:parties>政黨詳細資料" ) ) ; 
@@ -2082,7 +2076,7 @@ class Program
 		foreach( var c in cases ) 
 		{
 			File.Delete($"./html/cases/detail/{ c.No }.html");
-			using (StreamWriter o = File.AppendText($"./html/cases/detail/{ c.No }.html"))
+			using StreamWriter o = File.AppendText($"./html/cases/detail/{ c.No }.html");
 			{
 				o.WriteLine( Head( c.No ) ) ; 
 				o.WriteLine( Bread( "判例查詢:cases>判例詳細資料" ) ) ; 
@@ -2336,6 +2330,20 @@ class Program
 // ------------------------------------------------------------------
 // |    classes                                                     |
 // ------------------------------------------------------------------
+	[GeneratedRegex("^臺中市立臺中第一高級中等學校學生自治聯合會|^臺中第一高級中學")]
+	public static partial Regex title {get;} 
+	[GeneratedRegex("\\s")]
+	public static partial Regex hassp {get;} 
+	[GeneratedRegex("^\\s*")]
+	public static partial Regex begsp {get;} 
+	[GeneratedRegex("^\\s*第\\s*[一二三四五六七八九十]+\\s*[編章節款目]{1}\\s*")]
+	public static partial Regex cap {get;} 
+	[GeneratedRegex("^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\\u002E|[1-9]{1}\\u002E|[１-９]{1}[０-９]+\\u002E|[１-９]{1}\\u002E|（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）|（[1-9]{1}[0-9]+）|（[1-9]{1}）|（[１-９]{1}[０-９]+）|（[１-９]{1}）|[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)")]
+	public static partial Regex para {get;} 
+	[GeneratedRegex("[!-⬍⿰-㏿ﬓ-�\\s]")]
+	public static partial Regex nonch {get;} 
+	// [GeneratedRegex("^第[]條")]
+	// public static partial Regex artno {get;} 
 	public class LawRoot
 	{
 		required public string UpdateDate { get; set; }
