@@ -5,6 +5,10 @@ using System.Text.RegularExpressions;
 
 partial class Program
 {
+
+// ------------------------------------------------------------------
+// |    Bread                                                       |
+// ------------------------------------------------------------------
 	private static string Bread( string paths ) 
 	{
 		string b = "<div class=\"bread\">\n" ; 
@@ -45,6 +49,10 @@ partial class Program
 		b += "</div>\n" ; 
 		return b ; 
 	}
+
+// ------------------------------------------------------------------
+// |    Head                                                        |
+// ------------------------------------------------------------------
 	private static string Head( string pageTitle ) 
 	{
 		return $$"""
@@ -169,6 +177,10 @@ partial class Program
 		<main class="main">
 		""" ; 
 	}
+
+// ------------------------------------------------------------------
+// |    Main                                                        |
+// ------------------------------------------------------------------
 	static void Main()
 	{
 		string json = File.ReadAllText( "./json/laws.json" ) ;
@@ -290,6 +302,10 @@ partial class Program
 			</body>
 			</html>
 			""" ; 
+
+// ------------------------------------------------------------------
+// |    index                                                       |
+// ------------------------------------------------------------------
 		using (StreamWriter o = File.AppendText("./html/index.html"))
 		{
 			o.WriteLine( Head( "首頁" ) ) ; 
@@ -311,6 +327,10 @@ partial class Program
 			o.WriteLine( "</div>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
+
+// ------------------------------------------------------------------
+// |    laws                                                        |
+// ------------------------------------------------------------------
 		using (StreamWriter o = File.AppendText("./html/laws.html"))
 		{
 			o.WriteLine( Head( "法規查詢" ) ) ; 
@@ -333,6 +353,10 @@ partial class Program
 			o.WriteLine( "</script>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
+
+// ------------------------------------------------------------------
+// |    law                                                         |
+// ------------------------------------------------------------------
 		using (StreamWriter o = File.AppendText("./html/laws/law.html"))
 		{
 			o.WriteLine( Head( "" ) ) ; 
@@ -354,6 +378,10 @@ partial class Program
 			o.WriteLine( "</script>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
+
+// ------------------------------------------------------------------
+// |    lawe                                                        |
+// ------------------------------------------------------------------
 		using (StreamWriter o = File.AppendText("./html/laws/lawe.html"))
 		{
 			o.WriteLine( Head( "" ) ) ; 
@@ -394,6 +422,10 @@ partial class Program
 			File.Delete($"./html/laws/law/{ l.LawURL.Replace( "https://tcfshsu.github.io/law/laws/law?a=" , "" )[0] }/{ int.Parse( l.LawURL.Replace( "https://tcfshsu.github.io/law/laws/law?a=" , "" )[1..] ) }.html" ) ; 
 			// File.Copy($"./html/laws/lawe/{ l.LawURL.Replace( "https://tcfshsu.github.io/law/laws/law?a=" , "" )[0] }/{ int.Parse( l.LawURL.Replace( "https://tcfshsu.github.io/law/laws/law?a=" , "" )[1..] ) }.html" ,$"./{ now }/laws/lawe/{ l.LawURL.Replace( "https://tcfshsu.github.io/law/laws/law?a=" , "" )[0] }/{ int.Parse( l.LawURL.Replace( "https://tcfshsu.github.io/law/laws/law?a=" , "" )[1..] ) }.html" , true ) ;
 			File.Delete($"./html/laws/lawe/{ l.LawURL.Replace( "https://tcfshsu.github.io/law/laws/law?a=" , "" )[0] }/{ int.Parse( l.LawURL.Replace( "https://tcfshsu.github.io/law/laws/law?a=" , "" )[1..] ) }.html" ) ; 
+
+// ------------------------------------------------------------------
+// |    law/*                                                       |
+// ------------------------------------------------------------------
 			using (StreamWriter o = File.AppendText($"./html/laws/law/{ l.LawURL.Replace( "https://tcfshsu.github.io/law/laws/law?a=" , "" )[0] }/{ int.Parse( l.LawURL.Replace( "https://tcfshsu.github.io/law/laws/law?a=" , "" )[1..] ) }.html" ) ) 
 			{
 				o.WriteLine( Head( title.Replace( l.LawName , "" ) ) ) ; 
@@ -577,7 +609,6 @@ partial class Program
 						o.WriteLine( "</h6>" ) ; 
 						string artc = "" ; 
 						string[] aa = a.ArticleContent.Split( "\r\n" ) ; 
-						int pcount = 0 ; 
 						for( int i = 0 ; i < aa.Length ; ++ i ) 
 						{
 							artc += "<li id=\"\"" ; 
@@ -585,7 +616,6 @@ partial class Program
 							{
 								artc += " class=\"p\">\n" ; 
 								artc += aa[i] ; 
-								++ pcount ; 
 							}
 							else 
 							{
@@ -594,7 +624,7 @@ partial class Program
 							}
 							artc += "\n</li>\n" ; 
 						}
-						o.WriteLine( "<article" + ( pcount > 1 ? " class=\"showNum\"" : "" ) + ">" ) ; 
+						o.WriteLine($"<article{ a.ShowNumClass() }>" ) ; 
 						o.Write( artc ) ; 
 						o.WriteLine( "</article>" ) ; 
 					}
@@ -604,6 +634,10 @@ partial class Program
 				o.WriteLine( "</div>" ) ; 
 				o.WriteLine( foot ) ; 
 			}
+
+// ------------------------------------------------------------------
+// |    lawe/*                                                      |
+// ------------------------------------------------------------------
 			using (StreamWriter o = File.AppendText($"./html/laws/lawe/{ l.LawURL.Replace( "https://tcfshsu.github.io/law/laws/law?a=" , "" )[0] }/{ int.Parse( l.LawURL.Replace( "https://tcfshsu.github.io/law/laws/law?a=" , "" )[1..] ) }.html" ) ) 
 			{
 				o.WriteLine( Head( title.Replace( l.LawName , "" ) ) ) ; 
@@ -708,7 +742,7 @@ partial class Program
 							}
 							artc += "\n</li>\n" ; 
 						}
-						o.WriteLine( "<article" + ( pcount > 1 ? " class=\"showNum\"" : "" ) + ">" ) ; 
+						o.WriteLine($"<article{ a.ShowNumClass() }>" ) ; 
 						o.Write( artc ) ; 
 						o.WriteLine( "</article>" ) ; 
 					}
@@ -719,6 +753,10 @@ partial class Program
 				o.WriteLine( foot ) ; 
 			}
 		}
+
+// ------------------------------------------------------------------
+// |    print                                                       |
+// ------------------------------------------------------------------
 		using (StreamWriter o = File.AppendText("./html/print.html"))
 		{
 			o.WriteLine( Head( "法規彙編" ) ) ; 
@@ -925,7 +963,7 @@ partial class Program
 							}
 							artc += "\n</li>\n" ; 
 						}
-						o.WriteLine( "<article" + ( pcount > 1 ? " class=\"showNum\"" : "" ) + ">" ) ; 
+						o.WriteLine($"<article{ a.ShowNumClass() }>" ) ; 
 						o.Write( artc ) ; 
 						o.WriteLine( "</article>" ) ; 
 					}
@@ -938,6 +976,10 @@ partial class Program
 			o.WriteLine( "</div>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
+
+// ------------------------------------------------------------------
+// |    guide                                                       |
+// ------------------------------------------------------------------
 		using (StreamWriter o = File.AppendText("./html/guide.html"))
 		{
 			o.WriteLine( Head( "網站導覽" ) ) ; 
@@ -1012,6 +1054,10 @@ partial class Program
 				""" ) ; 
 			o.WriteLine( foot ) ; 
 		}
+
+// ------------------------------------------------------------------
+// |    open                                                        |
+// ------------------------------------------------------------------
 		using (StreamWriter o = File.AppendText("./html/open.html"))
 		{
 			o.WriteLine( Head( "資料開放宣告" ) ) ; 
@@ -1059,6 +1105,10 @@ partial class Program
 			o.WriteLine( "<a class=\"printNoDisplay\" href=\"\">回首頁</a>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
+
+// ------------------------------------------------------------------
+// |    rel                                                         |
+// ------------------------------------------------------------------
 		using (StreamWriter o = File.AppendText("./html/rel.html"))
 		{
 			o.WriteLine( Head( "相關連結" ) ) ; 
@@ -1562,6 +1612,10 @@ partial class Program
 				""" ) ; 
 			o.WriteLine( foot ) ; 
 		}
+
+// ------------------------------------------------------------------
+// |    s                                                           |
+// ------------------------------------------------------------------
 		using (StreamWriter o = File.AppendText("./html/s.html"))
 		{
 			o.WriteLine( Head( "統計" ) ) ; 
@@ -1674,6 +1728,10 @@ partial class Program
 			o.WriteLine( "</table>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
+
+// ------------------------------------------------------------------
+// |    latest                                                      |
+// ------------------------------------------------------------------
 		using (StreamWriter o = File.AppendText("./html/latest.html"))
 		{
 			o.WriteLine( Head( "最新消息" ) ) ; 
@@ -1824,6 +1882,10 @@ partial class Program
 				o.WriteLine( foot ) ; 
 			}
 		}
+
+// ------------------------------------------------------------------
+// |    parties                                                     |
+// ------------------------------------------------------------------
 		using (StreamWriter o = File.AppendText("./html/parties.html"))
 		{
 			o.WriteLine( Head( "政黨查詢" ) ) ; 
@@ -1872,6 +1934,10 @@ partial class Program
 			o.WriteLine( "</table>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
+
+// ------------------------------------------------------------------
+// |    parties/detail                                              |
+// ------------------------------------------------------------------
 		using (StreamWriter o = File.AppendText("./html/parties/detail.html"))
 		{
 			o.WriteLine( Head( "" ) ) ; 
@@ -1987,6 +2053,10 @@ partial class Program
 				o.WriteLine( foot ) ; 
 			}
 		}
+
+// ------------------------------------------------------------------
+// |    cases                                                       |
+// ------------------------------------------------------------------
 		using (StreamWriter o = File.AppendText("./html/cases.html"))
 		{
 			o.WriteLine( Head( "判例查詢" ) ) ; 
@@ -2050,6 +2120,10 @@ partial class Program
 			o.WriteLine( "<a class=\"printNoDisplay\" href=\"\">回首頁</a>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
+
+// ------------------------------------------------------------------
+// |    cases/detail                                                |
+// ------------------------------------------------------------------
 		using (StreamWriter o = File.AppendText("./html/cases/detail.html"))
 		{
 			o.WriteLine( Head( "" ) ) ; 
@@ -2342,6 +2416,8 @@ partial class Program
 	public static partial Regex para {get;} 
 	[GeneratedRegex("[!-⬍⿰-㏿ﬓ-�\\s]")]
 	public static partial Regex nonch {get;} 
+	// [GeneratedRegex("^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E|（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）|（[1-9]{1}[0-9]+）|（[1-9]{1}）|（[１-９]{1}[０-９]+）|（[１-９]{1}）|[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)")]
+	// public static partial Regex artno {get;} 
 	// [GeneratedRegex("^第[]條")]
 	// public static partial Regex artno {get;} 
 	public class LawRoot
@@ -2374,6 +2450,8 @@ partial class Program
 		public Cases[]? Cases { get; set; }
 		public Rel[]? Rel { get; set; }
 		public Ref[]? Ref { get; set; }
+		public string ShowNum() => ArticleContent.Split("\r\n").Count(a => !para.IsMatch(a)) > 1 ? "showNum" : "" ; 
+		public string ShowNumClass() => ArticleContent.Split("\r\n").Count(a => !para.IsMatch(a)) > 1 ? " class=\"showNum\"" : "" ; 
 	}
 	public class Attachments
 	{
