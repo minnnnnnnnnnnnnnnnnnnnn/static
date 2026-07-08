@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -336,6 +334,17 @@ partial class Program
 			o.WriteLine( Head( "法規查詢" ) ) ; 
 			o.WriteLine( Bread( "法規查詢" ) ) ; 
 			o.WriteLine( nos ) ; 
+			foreach( var l in laws ) 
+			{
+				o.WriteLine($"<a class=\"lawresult\" data-n=\"{ l.LawName }\">" ) ; 
+				o.WriteLine( "<div>" ) ; 
+				o.WriteLine( l.LawName ) ; 
+				o.WriteLine( "</div>" ) ; 
+				o.WriteLine( "<div class=\"preview\">" ) ; 
+				o.WriteLine( l.LawArticles[0].ArticleContent ) ; 
+				o.WriteLine( "</div>" ) ; 
+				o.WriteLine( "</a>" ) ; 
+			}
 			o.WriteLine( "<script>" ) ; 
 			o.WriteLine( "const qa = window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
 			o.WriteLine( "let qq = Array() ; " ) ; 
@@ -350,6 +359,8 @@ partial class Program
 			o.WriteLine( "{" ) ; 
 			o.WriteLine( "console.log(q.q);" ) ; 
 			o.WriteLine( "}" ) ; 
+			o.WriteLine( "let a ; " ) ; 
+			o.WriteLine( "document.getElementsByTagName( \"script\" )[0] ; " ) ; 
 			o.WriteLine( "</script>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
