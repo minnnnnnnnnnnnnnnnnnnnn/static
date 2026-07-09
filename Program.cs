@@ -251,6 +251,7 @@ partial class Program
 		ptd = pr[0].UpdateDate.Split('/')[2];
 		ctd = cr[0].UpdateDate.Split('/')[2];
 		string nos = "<noscript>您必須開啟JavaScript才能使用本站完整功能</noscript>" ; 
+		string[] lvarr = [ "章程" , "法律" , "命令" ] ; 
 		string foot = $$"""
 			</main>
 			<div class="toTop" tabindex="0" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})"><span>回最</span><span>上方</span></div>
@@ -334,18 +335,143 @@ partial class Program
 			o.WriteLine( Head( "法規查詢" ) ) ; 
 			o.WriteLine( Bread( "法規查詢" ) ) ; 
 			o.WriteLine( nos ) ; 
+			o.WriteLine( "<form action=\"laws\" method=\"get\" class=\"lq\">" ) ; 
+			o.WriteLine( "<label for=\"c\">" ) ; 
+			o.WriteLine( "類別：" ) ; 
+			o.WriteLine( "</label>" ) ; 
+			o.WriteLine( "<select name=\"c\" id=\"c\">" ) ; 
+			o.WriteLine( "<option>" ) ; 
+			o.WriteLine( "不限" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"c\">" ) ; 
+			o.WriteLine( "中央法規" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"ex\">" ) ; 
+			o.WriteLine( "行政法規" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"l\">" ) ; 
+			o.WriteLine( "立法法規" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"j\">" ) ; 
+			o.WriteLine( "司法法規" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"el\">" ) ; 
+			o.WriteLine( "選舉法規" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "</select>" ) ; 
+			o.WriteLine( "<label for=\"ab\">" ) ; 
+			o.WriteLine( "狀態：" ) ; 
+			o.WriteLine( "</label>" ) ; 
+			o.WriteLine( "<select name=\"ab\" id=\"ab\">" ) ; 
+			o.WriteLine( "<option>" ) ; 
+			o.WriteLine( "不限" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"false\">" ) ; 
+			o.WriteLine( "一般" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"true\">" ) ; 
+			o.WriteLine( "廢止" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "</select>" ) ; 
+			o.WriteLine( "<label for=\"lv\">" ) ; 
+			o.WriteLine( "位階：" ) ; 
+			o.WriteLine( "</label>" ) ; 
+			o.WriteLine( "<select name=\"l\" id=\"lv\">" ) ; 
+			o.WriteLine( "<option>" ) ; 
+			o.WriteLine( "不限" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"章程\">" ) ; 
+			o.WriteLine( "章程" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"法律\">" ) ; 
+			o.WriteLine( "法律" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"命令\">" ) ; 
+			o.WriteLine( "命令" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "</select>" ) ; 
+			o.WriteLine( "<p>" ) ; 
+			o.WriteLine( "<input type=\"search\" placeholder=\"輸入關鍵字以搜尋\" name=\"q\">" ) ; 
+			o.WriteLine( "<input type=\"submit\" style=\"background-image:url(https://tcfshsu.github.io/law/i/icon/search.svg);width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;\" value=\"\" alt=\"搜尋！\">" ) ; 
+			o.WriteLine( "</p>" ) ; 
+			o.WriteLine( "</form>" ) ; 
+			o.WriteLine( "<select>" ) ; 
+			o.WriteLine( "<option>" ) ; 
+			o.WriteLine( "預設" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"latest\">" ) ; 
+			o.WriteLine( "最後異動日期（新 &gt; 舊）" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"oldest\">" ) ; 
+			o.WriteLine( "最後異動日期（舊 &gt; 新）" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"long\">" ) ; 
+			o.WriteLine( "全名長度（長 &gt; 短）" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"short\">" ) ; 
+			o.WriteLine( "全名長度（短 &gt; 長）" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"longPure\">" ) ; 
+			o.WriteLine( "名稱長度（長 &gt; 短）" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"shortPure\">" ) ; 
+			o.WriteLine( "名稱長度（短 &gt; 長）" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"CtoO\">" ) ; 
+			o.WriteLine( "位階（高 &gt; 低）" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "<option value=\"OtoC\">" ) ; 
+			o.WriteLine( "位階（低 &gt; 高）" ) ; 
+			o.WriteLine( "</option>" ) ; 
+			o.WriteLine( "</select>" ) ; 
 			foreach( var l in laws ) 
 			{
-				o.WriteLine($"<a class=\"lawresult\" data-n=\"{ l.LawName }\">" ) ; 
+				o.WriteLine( "<a class=\"lawresult\"" ) ; 
+				o.WriteLine($"data-i=\"{ laws.IndexOf( l ) }\"" ) ; 
+				o.WriteLine($"data-t=\"{ l.LawModifiedDate }\"" ) ; 
+				o.WriteLine($"data-l=\"{ title.Replace( l.LawName , "" ).Length }\"" ) ; 
+				o.WriteLine($"data-fl=\"{ l.LawName.Length }\"" ) ; 
+				o.WriteLine($"data-lv=\"{ lvarr.IndexOf( l.LawLevel ) }\"" ) ; 
+				o.WriteLine( ">" ) ; 
 				o.WriteLine( "<div>" ) ; 
+				o.Write($"<span class=\"abandoned\">{ l.LawAbandonNote }</span>" ) ; 
 				o.WriteLine( l.LawName ) ; 
 				o.WriteLine( "</div>" ) ; 
 				o.WriteLine( "<div class=\"preview\">" ) ; 
-				o.WriteLine( l.LawArticles[0].ArticleContent ) ; 
+				if( !string.IsNullOrEmpty( l.LawForeword ) ) 
+				{
+					o.Write( "前言：" ) ; 
+					o.WriteLine( hassp.Replace( l.LawForeword , "" ) ) ; 
+				}
+				else 
+				{
+					foreach( var a in l.LawArticles ) 
+					{
+						if( a.ArticleType == "A" ) 
+						{
+							break ; 
+						}
+						o.Write( hassp.Replace( a.ArticleContent , "" ) ) ; 
+					}
+					var tmp = l.LawArticles.First( f => f.ArticleType == "A" ) ; 
+					o.Write( tmp.ArticleNo ) ; 
+					o.Write( hassp.Replace( tmp.ArticleContent , "" ) ) ; 
+					o.WriteLine( "…" ) ; 
+				}
 				o.WriteLine( "</div>" ) ; 
 				o.WriteLine( "</a>" ) ; 
 			}
-			o.WriteLine( "<script>" ) ; 
+			o.WriteLine( "<script id=\"main-script\">" ) ; 
+			string la = "latest" , ol = "oldest" , lo = "long" , sh = "short" , loP = "longPure" , shP = "shortPure" , c2o = "CtoO" , o2c = "OtoC" , de = "de" ; 
+			o.WriteLine( "function " + la  + "( l , h ) { return h.getAttribute( \"data-t\" ) - l.getAttribute( \"data-t\" ) ; } " ) ; 
+			o.WriteLine( "function " + ol  + "( l , h ) { return l.getAttribute( \"data-t\" ) - h.getAttribute( \"data-t\" ) ; } " ) ; 
+			o.WriteLine( "function " + lo  + "( l , h ) { return l.getAttribute( \"data-fl\" ) - h.getAttribute( \"data-fl\" ) ; } " ) ; 
+			o.WriteLine( "function " + sh  + "( l , h ) { return h.getAttribute( \"data-fl\" ) - l.getAttribute( \"data-fl\" ) ; } " ) ; 
+			o.WriteLine( "function " + loP + "( l , h ) { return l.getAttribute( \"data-l\" ) - h.getAttribute( \"data-l\" ) ; } " ) ; 
+			o.WriteLine( "function " + shP + "( l , h ) { return h.getAttribute( \"data-l\" ) - l.getAttribute( \"data-l\" ) ; } " ) ; 
+			o.WriteLine( "function " + c2o + "( l , h ) { return l.getAttribute( \"data-lv\" ) - h.getAttribute( \"data-lv\" ) ; } " ) ; 
+			o.WriteLine( "function " + o2c + "( l , h ) { return h.getAttribute( \"data-lv\" ) - l.getAttribute( \"data-lv\" ) ; } " ) ; 
+			o.WriteLine( "function " + de + "( l , h ) { return l.getAttribute( \"data-i\" ) - h.getAttribute( \"data-i\" ) ; } " ) ; 
 			o.WriteLine( "const qa = window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
 			o.WriteLine( "let qq = Array() ; " ) ; 
 			o.WriteLine( "for( let q of qa ) " ) ; 
@@ -359,8 +485,67 @@ partial class Program
 			o.WriteLine( "{" ) ; 
 			o.WriteLine( "console.log(q.q);" ) ; 
 			o.WriteLine( "}" ) ; 
-			o.WriteLine( "let a ; " ) ; 
-			o.WriteLine( "document.getElementsByTagName( \"script\" )[0] ; " ) ; 
+			o.WriteLine( "document.querySelector( \"main.main > select\" ).addEventListener( \"input\" , " ) ; 
+			o.WriteLine( "function( e ) " ) ; 
+			o.WriteLine( "{ " ) ; 
+			o.WriteLine( "switch( this.value ) " ) ; 
+			o.WriteLine( "{ " ) ; 
+			o.WriteLine( "case \"latest\": " ) ; 
+			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
+			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
+			o.WriteLine($".sort( { la } ) " ) ; 
+			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine( "break;" ) ; 
+			o.WriteLine( "case \"oldest\": " ) ; 
+			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
+			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
+			o.WriteLine($".sort( { ol } ) " ) ; 
+			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine( "break;" ) ; 
+			o.WriteLine( "case \"long\": " ) ; 
+			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
+			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
+			o.WriteLine($".sort( { lo } ) " ) ; 
+			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine( "break;" ) ; 
+			o.WriteLine( "case \"short\": " ) ; 
+			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
+			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
+			o.WriteLine($".sort( { sh } ) " ) ; 
+			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine( "break;" ) ; 
+			o.WriteLine( "case \"longPure\": " ) ; 
+			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
+			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
+			o.WriteLine($".sort( { loP } ) " ) ; 
+			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine( "break;" ) ; 
+			o.WriteLine( "case \"shortPure\": " ) ; 
+			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
+			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
+			o.WriteLine($".sort( { shP } ) " ) ; 
+			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine( "break;" ) ; 
+			o.WriteLine( "case \"CtoO\": " ) ; 
+			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
+			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
+			o.WriteLine($".sort( { c2o } ) " ) ; 
+			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine( "break;" ) ; 
+			o.WriteLine( "case \"OtoC\": " ) ; 
+			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
+			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
+			o.WriteLine($".sort( { o2c } ) " ) ; 
+			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine( "break;" ) ; 
+			o.WriteLine( "default: " ) ; 
+			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
+			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
+			o.WriteLine($".sort( { de } ) " ) ; 
+			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine( "break;" ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "} ) ; " ) ; 
 			o.WriteLine( "</script>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
