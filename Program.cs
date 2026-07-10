@@ -428,11 +428,12 @@ partial class Program
 			{
 				o.WriteLine( "<a class=\"lawresult\"" ) ; 
 				o.WriteLine($"data-i=\"{ laws.IndexOf( l ) }\"" ) ; 
+				o.WriteLine($"data-a=\"{ l.LawAbandonNote }\"" ) ; 
 				o.WriteLine($"data-t=\"{ l.LawModifiedDate }\"" ) ; 
 				o.WriteLine($"data-l=\"{ title.Replace( l.LawName , "" ).Length }\"" ) ; 
 				o.WriteLine($"data-fl=\"{ l.LawName.Length }\"" ) ; 
 				o.WriteLine($"data-lv=\"{ lvarr.IndexOf( l.LawLevel ) }\"" ) ; 
-				o.WriteLine($"data-c=\"{ string.Join( "" , l.LawArticles.Select( j => hassp.Replace( j.ArticleNo + j.ArticleContent , "" ) ) ) }\"" ) ; 
+				o.WriteLine($"data-c=\"{ hassp.Replace( l.LawName , "" ) + "|" + string.Join( "" , l.LawAttachments.Select( j => hassp.Replace( j.FileName , "" ) ) ) + "|" + string.Join( "" , l.LawArticles.Select( j => hassp.Replace( j.ArticleNo + j.ArticleContent , "" ) ) ) }\"" ) ; 
 				o.WriteLine( ">" ) ; 
 				o.WriteLine( "<div>" ) ; 
 				o.Write($"<span class=\"abandoned\">{ l.LawAbandonNote }</span>" ) ; 
@@ -463,7 +464,11 @@ partial class Program
 				o.WriteLine( "</a>" ) ; 
 			}
 			o.WriteLine( "<script id=\"main-script\">" ) ; 
-			string la = "latest" , ol = "oldest" , lo = "long" , sh = "short" , loP = "longPure" , shP = "shortPure" , c2o = "CtoO" , o2c = "OtoC" , de = "de" ; 
+			const string la = "latest" , ol = "oldest" , lo = "long" , sh = "short" , loP = "longPure" , shP = "shortPure" , c2o = "CtoO" , o2c = "OtoC" , de = "de" ; 
+			static string fn_preview( string e , string s ) 
+			{
+				return $"function preview( { e } , { s } ) \n{{ \nconst c = { e }.getAttribute( \"data-c\" ).split( '|' ) ; \n" ; 
+			}
 			o.WriteLine( "function " + la  + "( l , h ) { return h.getAttribute( \"data-t\" ) - l.getAttribute( \"data-t\" ) ; } " ) ; 
 			o.WriteLine( "function " + ol  + "( l , h ) { return l.getAttribute( \"data-t\" ) - h.getAttribute( \"data-t\" ) ; } " ) ; 
 			o.WriteLine( "function " + lo  + "( l , h ) { return h.getAttribute( \"data-fl\" ) - l.getAttribute( \"data-fl\" ) ; } " ) ; 
@@ -473,6 +478,26 @@ partial class Program
 			o.WriteLine( "function " + c2o + "( l , h ) { return l.getAttribute( \"data-lv\" ) - h.getAttribute( \"data-lv\" ) ; } " ) ; 
 			o.WriteLine( "function " + o2c + "( l , h ) { return h.getAttribute( \"data-lv\" ) - l.getAttribute( \"data-lv\" ) ; } " ) ; 
 			o.WriteLine( "function " + de + "( l , h ) { return l.getAttribute( \"data-i\" ) - h.getAttribute( \"data-i\" ) ; } " ) ; 
+			o.WriteLine( fn_preview( "e" , "s" ) ) ; 
+			o.WriteLine( "let r ; " ) ; 
+			o.WriteLine( "if( c[2].indexOf( s ) < 0 )" ) ; 
+			o.WriteLine( "{ " ) ; 
+			o.WriteLine( "r = e.children[1].innerText ; " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "else if( c[2].indexOf( s ) < 11 )" ) ; 
+			o.WriteLine( "{ " ) ; 
+			o.WriteLine( "r = c[2].substring( 0 , c[2].indexOf( s ) + 10 ).replace( s , \"<span class=\\\"matched\\\">\" + s + \"</span>\" ) + \"…\" ; " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "else if( c[2].length - c[2].indexOf( s ) < 11 )" ) ; 
+			o.WriteLine( "{ " ) ; 
+			o.WriteLine( "r = \"…\" + c[2].substring( c[2].length - 20 ).replace( s , \"<span class=\\\"matched\\\">\" + s + \"</span>\" ) ; " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "else " ) ; 
+			o.WriteLine( "{ " ) ; 
+			o.WriteLine( "r = \"…\" + c[2].substring( c[2].indexOf( s ) - 10 , c[2].indexOf( s ) + 10 ).replace( s , \"<span class=\\\"matched\\\">\" + s + \"</span>\" ) + \"…\" ; " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "return [ c[0].replaceAll( s , \"<span class=\\\"matched\\\">\" + s + \"</span>\" ) , \"附件\" , r ] ; " ) ; 
+			o.WriteLine( "} " ) ; 
 			o.WriteLine( "const qa = window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
 			o.WriteLine( "let qq = Array() ; " ) ; 
 			o.WriteLine( "for( let q of qa ) " ) ; 
@@ -485,9 +510,11 @@ partial class Program
 			o.WriteLine( "if( q ) " ) ; 
 			o.WriteLine( "{" ) ; 
 			o.WriteLine( "q.q = decodeURI( q.q ) ; " ) ; 
-			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
-			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
-			o.WriteLine( ".filter( e => !e.getAttribute( \"data-c\" ).includes( q.q ) ) " ) ; 
+			o.WriteLine( "const arr = [ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
+			o.WriteLine( ".filter( e => e.tagName == \"A\" ) ; " ) ; 
+			o.WriteLine( "arr.forEach( e => { e.children[1].innerHTML = preview( e , q.q )[2] ; } ) ; " ) ; 
+			o.WriteLine( "arr.forEach( e => { e.children[0].innerHTML = \"<span class=\\\"abandoned\\\">\" + e.getAttribute( \"data-a\" ) + \"</span>\" + preview( e , q.q )[0] ; } ) ; " ) ; 
+			o.WriteLine( "arr.filter( e => !e.getAttribute( \"data-c\" ).includes( q.q ) ) " ) ; 
 			o.WriteLine( ".forEach( e => { e.style.display = \"none\" ; } ) " ) ; 
 			o.WriteLine( "}" ) ; 
 			o.WriteLine( "document.querySelector( \"main.main > select\" ).addEventListener( \"input\" , " ) ; 
