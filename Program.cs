@@ -469,15 +469,15 @@ partial class Program
 			{
 				return $"function preview( { e } , { s } ) \n{{ \nconst c = { e }.getAttribute( \"data-c\" ).split( '|' ) ; \n" ; 
 			}
-			o.WriteLine( "function " + la  + "( l , h ) { return h.getAttribute( \"data-t\" ) - l.getAttribute( \"data-t\" ) ; } " ) ; 
-			o.WriteLine( "function " + ol  + "( l , h ) { return l.getAttribute( \"data-t\" ) - h.getAttribute( \"data-t\" ) ; } " ) ; 
+			o.WriteLine( "function " + la  + "( l , h ) { return h.getAttribute( \"data-t\"  ) - l.getAttribute( \"data-t\"  ) ; } " ) ; 
+			o.WriteLine( "function " + ol  + "( l , h ) { return l.getAttribute( \"data-t\"  ) - h.getAttribute( \"data-t\"  ) ; } " ) ; 
 			o.WriteLine( "function " + lo  + "( l , h ) { return h.getAttribute( \"data-fl\" ) - l.getAttribute( \"data-fl\" ) ; } " ) ; 
 			o.WriteLine( "function " + sh  + "( l , h ) { return l.getAttribute( \"data-fl\" ) - h.getAttribute( \"data-fl\" ) ; } " ) ; 
-			o.WriteLine( "function " + loP + "( l , h ) { return h.getAttribute( \"data-l\" ) - l.getAttribute( \"data-l\" ) ; } " ) ; 
-			o.WriteLine( "function " + shP + "( l , h ) { return l.getAttribute( \"data-l\" ) - h.getAttribute( \"data-l\" ) ; } " ) ; 
+			o.WriteLine( "function " + loP + "( l , h ) { return h.getAttribute( \"data-l\"  ) - l.getAttribute( \"data-l\"  ) ; } " ) ; 
+			o.WriteLine( "function " + shP + "( l , h ) { return l.getAttribute( \"data-l\"  ) - h.getAttribute( \"data-l\"  ) ; } " ) ; 
 			o.WriteLine( "function " + c2o + "( l , h ) { return l.getAttribute( \"data-lv\" ) - h.getAttribute( \"data-lv\" ) ; } " ) ; 
 			o.WriteLine( "function " + o2c + "( l , h ) { return h.getAttribute( \"data-lv\" ) - l.getAttribute( \"data-lv\" ) ; } " ) ; 
-			o.WriteLine( "function " + de + "( l , h ) { return l.getAttribute( \"data-i\" ) - h.getAttribute( \"data-i\" ) ; } " ) ; 
+			o.WriteLine( "function " + de  + "( l , h ) { return l.getAttribute( \"data-i\"  ) - h.getAttribute( \"data-i\"  ) ; } " ) ; 
 			o.WriteLine( fn_preview( "e" , "s" ) ) ; 
 			o.WriteLine( "let r ; " ) ; 
 			o.WriteLine( "if( c[2].indexOf( s ) < 0 )" ) ; 
