@@ -432,6 +432,7 @@ partial class Program
 				o.WriteLine($"data-l=\"{ title.Replace( l.LawName , "" ).Length }\"" ) ; 
 				o.WriteLine($"data-fl=\"{ l.LawName.Length }\"" ) ; 
 				o.WriteLine($"data-lv=\"{ lvarr.IndexOf( l.LawLevel ) }\"" ) ; 
+				o.WriteLine($"data-c=\"{ string.Join( "" , l.LawArticles.Select( j => hassp.Replace( j.ArticleNo + j.ArticleContent , "" ) ) ) }\"" ) ; 
 				o.WriteLine( ">" ) ; 
 				o.WriteLine( "<div>" ) ; 
 				o.Write($"<span class=\"abandoned\">{ l.LawAbandonNote }</span>" ) ; 
@@ -465,10 +466,10 @@ partial class Program
 			string la = "latest" , ol = "oldest" , lo = "long" , sh = "short" , loP = "longPure" , shP = "shortPure" , c2o = "CtoO" , o2c = "OtoC" , de = "de" ; 
 			o.WriteLine( "function " + la  + "( l , h ) { return h.getAttribute( \"data-t\" ) - l.getAttribute( \"data-t\" ) ; } " ) ; 
 			o.WriteLine( "function " + ol  + "( l , h ) { return l.getAttribute( \"data-t\" ) - h.getAttribute( \"data-t\" ) ; } " ) ; 
-			o.WriteLine( "function " + lo  + "( l , h ) { return l.getAttribute( \"data-fl\" ) - h.getAttribute( \"data-fl\" ) ; } " ) ; 
-			o.WriteLine( "function " + sh  + "( l , h ) { return h.getAttribute( \"data-fl\" ) - l.getAttribute( \"data-fl\" ) ; } " ) ; 
-			o.WriteLine( "function " + loP + "( l , h ) { return l.getAttribute( \"data-l\" ) - h.getAttribute( \"data-l\" ) ; } " ) ; 
-			o.WriteLine( "function " + shP + "( l , h ) { return h.getAttribute( \"data-l\" ) - l.getAttribute( \"data-l\" ) ; } " ) ; 
+			o.WriteLine( "function " + lo  + "( l , h ) { return h.getAttribute( \"data-fl\" ) - l.getAttribute( \"data-fl\" ) ; } " ) ; 
+			o.WriteLine( "function " + sh  + "( l , h ) { return l.getAttribute( \"data-fl\" ) - h.getAttribute( \"data-fl\" ) ; } " ) ; 
+			o.WriteLine( "function " + loP + "( l , h ) { return h.getAttribute( \"data-l\" ) - l.getAttribute( \"data-l\" ) ; } " ) ; 
+			o.WriteLine( "function " + shP + "( l , h ) { return l.getAttribute( \"data-l\" ) - h.getAttribute( \"data-l\" ) ; } " ) ; 
 			o.WriteLine( "function " + c2o + "( l , h ) { return l.getAttribute( \"data-lv\" ) - h.getAttribute( \"data-lv\" ) ; } " ) ; 
 			o.WriteLine( "function " + o2c + "( l , h ) { return h.getAttribute( \"data-lv\" ) - l.getAttribute( \"data-lv\" ) ; } " ) ; 
 			o.WriteLine( "function " + de + "( l , h ) { return l.getAttribute( \"data-i\" ) - h.getAttribute( \"data-i\" ) ; } " ) ; 
@@ -483,7 +484,11 @@ partial class Program
 			o.WriteLine( "const q = qq.filter( i => i.q )[0] ; " ) ; 
 			o.WriteLine( "if( q ) " ) ; 
 			o.WriteLine( "{" ) ; 
-			o.WriteLine( "console.log(q.q);" ) ; 
+			o.WriteLine( "q.q = decodeURI( q.q ) ; " ) ; 
+			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
+			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
+			o.WriteLine( ".filter( e => !e.getAttribute( \"data-c\" ).includes( q.q ) ) " ) ; 
+			o.WriteLine( ".forEach( e => { e.style.display = \"none\" ; } ) " ) ; 
 			o.WriteLine( "}" ) ; 
 			o.WriteLine( "document.querySelector( \"main.main > select\" ).addEventListener( \"input\" , " ) ; 
 			o.WriteLine( "function( e ) " ) ; 
