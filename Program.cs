@@ -240,6 +240,8 @@ partial class Program
 		File.Delete( "./html/parties/detail.html" ) ; 
 		File.Delete( "./html/cases.html" ) ; 
 		File.Delete( "./html/cases/detail.html" ) ; 
+		File.Delete( "./html/laws/law.html" ) ; 
+		File.Delete( "./html/laws/lawe.html" ) ; 
 		string lty , ltm , ltd , pty , ptm , ptd , cty , ctm , ctd ; 
 		lty = ( int.Parse(lr[0].UpdateDate.Split('/')[0]) - 1911 ).ToString();
 		pty = ( int.Parse(pr[0].UpdateDate.Split('/')[0]) - 1911 ).ToString();
@@ -396,31 +398,32 @@ partial class Program
 			o.WriteLine( "</p>" ) ; 
 			o.WriteLine( "</form>" ) ; 
 			o.WriteLine( "<select>" ) ; 
+			const string la = "latest" , ol = "oldest" , lo = "long" , sh = "short" , loP = "longPure" , shP = "shortPure" , c2o = "CtoO" , o2c = "OtoC" , de = "de" ; 
 			o.WriteLine( "<option>" ) ; 
 			o.WriteLine( "預設" ) ; 
 			o.WriteLine( "</option>" ) ; 
-			o.WriteLine( "<option value=\"latest\">" ) ; 
+			o.WriteLine($"<option value=\"{ la }\">" ) ; 
 			o.WriteLine( "最後異動日期（新 &gt; 舊）" ) ; 
 			o.WriteLine( "</option>" ) ; 
-			o.WriteLine( "<option value=\"oldest\">" ) ; 
+			o.WriteLine($"<option value=\"{ ol }\">" ) ; 
 			o.WriteLine( "最後異動日期（舊 &gt; 新）" ) ; 
 			o.WriteLine( "</option>" ) ; 
-			o.WriteLine( "<option value=\"long\">" ) ; 
+			o.WriteLine($"<option value=\"{ lo }\">" ) ; 
 			o.WriteLine( "全名長度（長 &gt; 短）" ) ; 
 			o.WriteLine( "</option>" ) ; 
-			o.WriteLine( "<option value=\"short\">" ) ; 
+			o.WriteLine($"<option value=\"{ sh }\">" ) ; 
 			o.WriteLine( "全名長度（短 &gt; 長）" ) ; 
 			o.WriteLine( "</option>" ) ; 
-			o.WriteLine( "<option value=\"longPure\">" ) ; 
+			o.WriteLine($"<option value=\"{ loP }\">" ) ; 
 			o.WriteLine( "名稱長度（長 &gt; 短）" ) ; 
 			o.WriteLine( "</option>" ) ; 
-			o.WriteLine( "<option value=\"shortPure\">" ) ; 
+			o.WriteLine($"<option value=\"{ shP }\">" ) ; 
 			o.WriteLine( "名稱長度（短 &gt; 長）" ) ; 
 			o.WriteLine( "</option>" ) ; 
-			o.WriteLine( "<option value=\"CtoO\">" ) ; 
+			o.WriteLine($"<option value=\"{ c2o }\">" ) ; 
 			o.WriteLine( "位階（高 &gt; 低）" ) ; 
 			o.WriteLine( "</option>" ) ; 
-			o.WriteLine( "<option value=\"OtoC\">" ) ; 
+			o.WriteLine($"<option value=\"{ o2c }\">" ) ; 
 			o.WriteLine( "位階（低 &gt; 高）" ) ; 
 			o.WriteLine( "</option>" ) ; 
 			o.WriteLine( "</select>" ) ; 
@@ -430,10 +433,20 @@ partial class Program
 				o.WriteLine($"data-i=\"{ laws.IndexOf( l ) }\"" ) ; 
 				o.WriteLine($"data-a=\"{ l.LawAbandonNote }\"" ) ; 
 				o.WriteLine($"data-t=\"{ l.LawModifiedDate }\"" ) ; 
+				o.WriteLine($"data-cat=\"{ 
+					l.LawCategory switch 
+					{ 
+						string str when str.Contains( Cat_T.選舉法規.ToString() ) => (int)Cat_T.選舉法規 , 
+						string str when str.Contains( Cat_T.中央法規.ToString() ) => (int)Cat_T.中央法規 , 
+						string str when str.Contains( Cat_T.行政法規.ToString() ) => (int)Cat_T.行政法規 , 
+						string str when str.Contains( Cat_T.立法法規.ToString() ) => (int)Cat_T.立法法規 , 
+						string str when str.Contains( Cat_T.司法法規.ToString() ) => (int)Cat_T.司法法規 , 
+						_ => -1 
+					} }\"" ) ; 
 				o.WriteLine($"data-l=\"{ title.Replace( l.LawName , "" ).Length }\"" ) ; 
 				o.WriteLine($"data-fl=\"{ l.LawName.Length }\"" ) ; 
 				o.WriteLine($"data-lv=\"{ lvarr.IndexOf( l.LawLevel ) }\"" ) ; 
-				o.WriteLine($"data-c=\"{ hassp.Replace( l.LawName , "" ) + "|" + string.Join( "" , l.LawAttachments.Select( j => hassp.Replace( j.FileName , "" ) ) ) + "|" + string.Join( "" , l.LawArticles.Select( j => hassp.Replace( j.ArticleNo + j.ArticleContent , "" ) ) ) }\"" ) ; 
+				o.WriteLine($"data-c=\"{ hassp.Replace( l.LawName , "" ) + '|' + string.Join( "" , l.LawAttachments.Select( j => hassp.Replace( j.FileName , "" ) ) ) + '|' + string.Join( "" , l.LawArticles.Select( j => hassp.Replace( j.ArticleNo + j.ArticleContent , "" ) ) ) }\"" ) ; 
 				o.WriteLine( ">" ) ; 
 				o.WriteLine( "<div>" ) ; 
 				o.Write($"<span class=\"abandoned\">{ l.LawAbandonNote }</span>" ) ; 
@@ -464,40 +477,63 @@ partial class Program
 				o.WriteLine( "</a>" ) ; 
 			}
 			o.WriteLine( "<script id=\"main-script\">" ) ; 
-			const string la = "latest" , ol = "oldest" , lo = "long" , sh = "short" , loP = "longPure" , shP = "shortPure" , c2o = "CtoO" , o2c = "OtoC" , de = "de" ; 
 			static string fn_preview( string e , string s ) 
 			{
-				return $"function preview( { e } , { s } ) \n{{ \nconst c = { e }.getAttribute( \"data-c\" ).split( '|' ) ; \n" ; 
+				return $$"""
+				function preview( {{ e }} , {{ s }} ) 
+				{ 
+				const ss = {{ s }}.split( /\s/ ) ; 
+				const c = {{ e }}.getAttribute( "data-c" ).split( '|' ) ; 
+				const t_o = "<span class=\"matched\">" , t_c = "</span>" ; 
+				const off = 10 ; 
+				let r = [] , r0 = c[0] , r2 = c[2] ; 
+				for( let t of ss ) 
+				{
+				const c2i = c[2].indexOf( t ) ; 
+				r.push( [ c2i , t.length ] ) ; 
+				}
+				r = r.filter( e => e[0] != -1 ) ; 
+				if( !r.length ) 
+				{
+				r = {{ e }}.children[1].innerText ; 
+				}
+				else 
+				{
+				r = [ ... new Set( r.sort( ( a , b ) => a[0] - b[0] ) ) ] ; 
+				r2 = r2.substring( r[0][0] - off ) ; 
+				const r00 = r[0][0] > off ? r[0][0] - off : r[0][0] ; 
+				r.forEach( e => { e[0] -= r00 ; } ) ; 
+				if( r[ r.length - 1 ][0] < 3 * off ) 
+				{
+				r2 = r2.substring( 0 , r[ r.length - 1 ][0] + r[ r.length - 1 ][1] + off ) ; 
+				r = r.flatMap( x => [ x[0] , x[0] + x[1] ] ) ; 
+				console.log( [ 0 , ... r ].map( ( x , i ) => r2.slice( x , r[i] ) ) ) ; 
+				}
+				}
+				return [ r0 , "附件" , r2 ] ; 
+				} 
+				""" ; 
 			}
-			o.WriteLine( "function " + la  + "( l , h ) { return h.getAttribute( \"data-t\"  ) - l.getAttribute( \"data-t\"  ) ; } " ) ; 
-			o.WriteLine( "function " + ol  + "( l , h ) { return l.getAttribute( \"data-t\"  ) - h.getAttribute( \"data-t\"  ) ; } " ) ; 
-			o.WriteLine( "function " + lo  + "( l , h ) { return h.getAttribute( \"data-fl\" ) - l.getAttribute( \"data-fl\" ) ; } " ) ; 
-			o.WriteLine( "function " + sh  + "( l , h ) { return l.getAttribute( \"data-fl\" ) - h.getAttribute( \"data-fl\" ) ; } " ) ; 
-			o.WriteLine( "function " + loP + "( l , h ) { return h.getAttribute( \"data-l\"  ) - l.getAttribute( \"data-l\"  ) ; } " ) ; 
-			o.WriteLine( "function " + shP + "( l , h ) { return l.getAttribute( \"data-l\"  ) - h.getAttribute( \"data-l\"  ) ; } " ) ; 
-			o.WriteLine( "function " + c2o + "( l , h ) { return l.getAttribute( \"data-lv\" ) - h.getAttribute( \"data-lv\" ) ; } " ) ; 
-			o.WriteLine( "function " + o2c + "( l , h ) { return h.getAttribute( \"data-lv\" ) - l.getAttribute( \"data-lv\" ) ; } " ) ; 
-			o.WriteLine( "function " + de  + "( l , h ) { return l.getAttribute( \"data-i\"  ) - h.getAttribute( \"data-i\"  ) ; } " ) ; 
+			static string fn_sort( string sort_fn ) 
+			{
+				return $$"""
+				[ ... document.getElementsByTagName( "main" )[0].children ] 
+				.filter( e => e.tagName == "A" ) 
+				.sort( {{ sort_fn }} ) 
+				.forEach( a => { document.getElementById( "main-script" ).before( a ) ; } ) ; 
+				""" ; 
+			}
+			o.WriteLine($"function { la }( l , h ) {{ return h.getAttribute( \"data-t\"  ) - l.getAttribute( \"data-t\"  ) ; }} " ) ; 
+			o.WriteLine($"function { ol }( l , h ) {{ return l.getAttribute( \"data-t\"  ) - h.getAttribute( \"data-t\"  ) ; }} " ) ; 
+			o.WriteLine($"function { lo }( l , h ) {{ return h.getAttribute( \"data-fl\" ) - l.getAttribute( \"data-fl\" ) ; }} " ) ; 
+			o.WriteLine($"function { sh }( l , h ) {{ return l.getAttribute( \"data-fl\" ) - h.getAttribute( \"data-fl\" ) ; }} " ) ; 
+			o.WriteLine($"function { loP}( l , h ) {{ return h.getAttribute( \"data-l\"  ) - l.getAttribute( \"data-l\"  ) ; }} " ) ; 
+			o.WriteLine($"function { shP}( l , h ) {{ return l.getAttribute( \"data-l\"  ) - h.getAttribute( \"data-l\"  ) ; }} " ) ; 
+			o.WriteLine($"function { c2o}( l , h ) {{ return l.getAttribute( \"data-lv\" ) - h.getAttribute( \"data-lv\" ) ; }} " ) ; 
+			o.WriteLine($"function { o2c}( l , h ) {{ return h.getAttribute( \"data-lv\" ) - l.getAttribute( \"data-lv\" ) ; }} " ) ; 
+			o.WriteLine($"function { de }( l , h ) {{ return l.getAttribute( \"data-i\"  ) - h.getAttribute( \"data-i\"  ) ; }} " ) ; 
 			o.WriteLine( fn_preview( "e" , "s" ) ) ; 
-			o.WriteLine( "let r ; " ) ; 
-			o.WriteLine( "if( c[2].indexOf( s ) < 0 )" ) ; 
-			o.WriteLine( "{ " ) ; 
-			o.WriteLine( "r = e.children[1].innerText ; " ) ; 
-			o.WriteLine( "} " ) ; 
-			o.WriteLine( "else if( c[2].indexOf( s ) < 11 )" ) ; 
-			o.WriteLine( "{ " ) ; 
-			o.WriteLine( "r = c[2].substring( 0 , c[2].indexOf( s ) + 10 ).replace( s , \"<span class=\\\"matched\\\">\" + s + \"</span>\" ) + \"…\" ; " ) ; 
-			o.WriteLine( "} " ) ; 
-			o.WriteLine( "else if( c[2].length - c[2].indexOf( s ) < 11 )" ) ; 
-			o.WriteLine( "{ " ) ; 
-			o.WriteLine( "r = \"…\" + c[2].substring( c[2].length - 20 ).replace( s , \"<span class=\\\"matched\\\">\" + s + \"</span>\" ) ; " ) ; 
-			o.WriteLine( "} " ) ; 
-			o.WriteLine( "else " ) ; 
-			o.WriteLine( "{ " ) ; 
-			o.WriteLine( "r = \"…\" + c[2].substring( c[2].indexOf( s ) - 10 , c[2].indexOf( s ) + 10 ).replace( s , \"<span class=\\\"matched\\\">\" + s + \"</span>\" ) + \"…\" ; " ) ; 
-			o.WriteLine( "} " ) ; 
-			o.WriteLine( "return [ c[0].replaceAll( s , \"<span class=\\\"matched\\\">\" + s + \"</span>\" ) , \"附件\" , r ] ; " ) ; 
-			o.WriteLine( "} " ) ; 
+			o.WriteLine($"const cat_t = {{ { CatT.c }: { (int)CatT.c } , { CatT.ex }: { (int)CatT.ex } , { CatT.l }: { (int)CatT.l } , { CatT.j }: { (int)CatT.j } , { CatT.el }: { (int)CatT.el } }} ; " ) ; 
 			o.WriteLine( "const qa = window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
 			o.WriteLine( "let qq = Array() ; " ) ; 
 			o.WriteLine( "for( let q of qa ) " ) ; 
@@ -506,75 +542,56 @@ partial class Program
 			o.WriteLine( "temp[q.split( '=' )[0]] = q.split( '=' )[1] ; " ) ; 
 			o.WriteLine( "qq.push( temp ) ; " ) ; 
 			o.WriteLine( "} " ) ; 
-			o.WriteLine( "const q = qq.filter( i => i.q )[0] ; " ) ; 
+			o.WriteLine( "const q = { q: qq.filter( i => i.q ).length ? qq.filter( i => i.q )[0].q : null , c: qq.filter( i => i.c ).length ? qq.filter( i => i.c )[0].c : null } ; " ) ; 
 			o.WriteLine( "if( q ) " ) ; 
 			o.WriteLine( "{" ) ; 
-			o.WriteLine( "q.q = decodeURI( q.q ) ; " ) ; 
 			o.WriteLine( "const arr = [ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
 			o.WriteLine( ".filter( e => e.tagName == \"A\" ) ; " ) ; 
+			o.WriteLine( "if( q.q ) " ) ; 
+			o.WriteLine( "{" ) ; 
+			o.WriteLine( "q.q = decodeURI( q.q ) ; " ) ; 
 			o.WriteLine( "arr.forEach( e => { e.children[1].innerHTML = preview( e , q.q )[2] ; } ) ; " ) ; 
 			o.WriteLine( "arr.forEach( e => { e.children[0].innerHTML = \"<span class=\\\"abandoned\\\">\" + e.getAttribute( \"data-a\" ) + \"</span>\" + preview( e , q.q )[0] ; } ) ; " ) ; 
-			o.WriteLine( "arr.filter( e => !e.getAttribute( \"data-c\" ).includes( q.q ) ) " ) ; 
+			o.WriteLine( "arr.filter( e => !q.q.split( /\\s/ ).some( qq => e.getAttribute( \"data-c\" ).includes( qq ) ) ) " ) ; 
 			o.WriteLine( ".forEach( e => { e.style.display = \"none\" ; } ) " ) ; 
 			o.WriteLine( "}" ) ; 
+			o.WriteLine( "if( q.c ) " ) ; 
+			o.WriteLine( "{ " ) ; 
+			o.WriteLine( "arr.filter( e => e.getAttribute( \"data-cat\" ) - cat_t[q.c.toLowerCase()] ) " ) ; 
+			o.WriteLine( ".forEach( e => { e.style.display = \"none\" ; } ) " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "} " ) ; 
 			o.WriteLine( "document.querySelector( \"main.main > select\" ).addEventListener( \"input\" , " ) ; 
 			o.WriteLine( "function( e ) " ) ; 
 			o.WriteLine( "{ " ) ; 
 			o.WriteLine( "switch( this.value ) " ) ; 
 			o.WriteLine( "{ " ) ; 
-			o.WriteLine( "case \"latest\": " ) ; 
-			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
-			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
-			o.WriteLine($".sort( { la } ) " ) ; 
-			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine($"case \"{ la }\": " ) ; 
+			o.WriteLine( fn_sort( la ) ) ; 
 			o.WriteLine( "break;" ) ; 
-			o.WriteLine( "case \"oldest\": " ) ; 
-			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
-			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
-			o.WriteLine($".sort( { ol } ) " ) ; 
-			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine($"case \"{ ol }\": " ) ; 
+			o.WriteLine( fn_sort( ol ) ) ; 
 			o.WriteLine( "break;" ) ; 
-			o.WriteLine( "case \"long\": " ) ; 
-			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
-			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
-			o.WriteLine($".sort( { lo } ) " ) ; 
-			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine($"case \"{ lo }\": " ) ; 
+			o.WriteLine( fn_sort( lo ) ) ; 
 			o.WriteLine( "break;" ) ; 
-			o.WriteLine( "case \"short\": " ) ; 
-			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
-			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
-			o.WriteLine($".sort( { sh } ) " ) ; 
-			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine($"case \"{ sh }\": " ) ; 
+			o.WriteLine( fn_sort( sh ) ) ; 
 			o.WriteLine( "break;" ) ; 
-			o.WriteLine( "case \"longPure\": " ) ; 
-			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
-			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
-			o.WriteLine($".sort( { loP } ) " ) ; 
-			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine($"case \"{ loP }\": " ) ; 
+			o.WriteLine( fn_sort( loP ) ) ; 
 			o.WriteLine( "break;" ) ; 
-			o.WriteLine( "case \"shortPure\": " ) ; 
-			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
-			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
-			o.WriteLine($".sort( { shP } ) " ) ; 
-			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine($"case \"{ shP }\": " ) ; 
+			o.WriteLine( fn_sort( shP ) ) ; 
 			o.WriteLine( "break;" ) ; 
-			o.WriteLine( "case \"CtoO\": " ) ; 
-			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
-			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
-			o.WriteLine($".sort( { c2o } ) " ) ; 
-			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine($"case \"{ c2o }\": " ) ; 
+			o.WriteLine( fn_sort( c2o ) ) ; 
 			o.WriteLine( "break;" ) ; 
-			o.WriteLine( "case \"OtoC\": " ) ; 
-			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
-			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
-			o.WriteLine($".sort( { o2c } ) " ) ; 
-			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine($"case \"{ o2c }\": " ) ; 
+			o.WriteLine( fn_sort( o2c ) ) ; 
 			o.WriteLine( "break;" ) ; 
 			o.WriteLine( "default: " ) ; 
-			o.WriteLine( "[ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
-			o.WriteLine( ".filter( e => e.tagName == \"A\" ) " ) ; 
-			o.WriteLine($".sort( { de } ) " ) ; 
-			o.WriteLine( ".forEach( a => { document.getElementById( \"main-script\" ).before( a ) ; } ) ; " ) ; 
+			o.WriteLine( fn_sort( de ) ) ; 
 			o.WriteLine( "break;" ) ; 
 			o.WriteLine( "} " ) ; 
 			o.WriteLine( "} ) ; " ) ; 
@@ -2648,6 +2665,14 @@ partial class Program
 	// public static partial Regex artno {get;} 
 	// [GeneratedRegex("^第[]條")]
 	// public static partial Regex artno {get;} 
+	public enum CatT 
+	{
+		c , ex , l , j , el 
+	} 
+	public enum Cat_T 
+	{
+		中央法規 , 行政法規 , 立法法規 , 司法法規 , 選舉法規 
+	}
 	public class LawRoot
 	{
 		required public string UpdateDate { get; set; }
