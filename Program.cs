@@ -506,8 +506,21 @@ partial class Program
 				if( r[ r.length - 1 ][0] < 3 * off ) 
 				{
 				r2 = r2.substring( 0 , r[ r.length - 1 ][0] + r[ r.length - 1 ][1] + off ) ; 
+				let overlap = r.some( ( x , i , a ) => a.length - i == 1 ? false : x[0] + x[1] >= a[ i + 1 ][0] ) ; 
+				if( overlap ) 
+				{
+				// TODO
+				
+				}
+				else 
+				{
 				r = r.flatMap( x => [ x[0] , x[0] + x[1] ] ) ; 
-				console.log( [ 0 , ... r ].map( ( x , i ) => r2.slice( x , r[i] ) ) ) ; 
+				r2 = [ 0 , ... r ].map( ( x , i ) => r2.slice( x , r[i] ) ).map( ( x , i ) => i % 2 ? x + t_c : x + t_o ).join( "" ) + "</span>" ; 
+				}
+				}
+				else 
+				{
+				// TODO
 				}
 				}
 				return [ r0 , "附件" , r2 ] ; 
@@ -1106,6 +1119,11 @@ partial class Program
 			iii = 0 ; 
 			foreach( var ll in law_by_c ) 
 			{
+			o.WriteLine( "<span class=\"break\">" ) ; 
+			o.WriteLine( "<div style=\"display:inline;\">" ) ; 
+			o.WriteLine( ll[0].LawCategory.Contains( "選舉法規" ) ? "選舉法規" : ll[0].LawCategory[..4] ) ; 
+			o.WriteLine( "</div>" ) ; 
+			o.WriteLine( "</span>" ) ; 
 			foreach( var l in ll ) 
 			{
 				o.WriteLine($"<div id=\"{ iii ++ }\">" ) ; 
