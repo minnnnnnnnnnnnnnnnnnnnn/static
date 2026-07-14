@@ -570,6 +570,7 @@ partial class Program
 			o.WriteLine( "}" ) ; 
 			o.WriteLine( "if( q.c ) " ) ; 
 			o.WriteLine( "{ " ) ; 
+			o.WriteLine( "q.c = decodeURI( q.c ) ; " ) ; 
 			o.WriteLine( "arr.filter( e => e.getAttribute( \"data-cat\" ) - cat_t[q.c.toLowerCase()] ) " ) ; 
 			o.WriteLine( ".forEach( e => { e.style.display = \"none\" ; } ) " ) ; 
 			o.WriteLine( "} " ) ; 
@@ -2354,7 +2355,9 @@ partial class Program
 			o.WriteLine( "<tbody>" ) ; 
 			foreach( var cas in cases ) 
 			{
-			o.WriteLine( "<tr>" ) ; 
+			o.WriteLine( "<tr " ) ; 
+			o.WriteLine($"data-cat=\"{ cas.Category }\"" ) ; 
+			o.WriteLine( ">" ) ; 
 			o.WriteLine( "<td>" ) ; 
 			o.WriteLine($"<a href=\"cases/detail?case={ cas.No }&q=\" target=\"_self\">" ) ; 
 			o.WriteLine( cas.No ) ; 
@@ -2381,6 +2384,31 @@ partial class Program
 			o.WriteLine( "</table>" ) ; 
 			o.WriteLine( "<br />" ) ; 
 			o.WriteLine( "<a class=\"printNoDisplay\" href=\"\">回首頁</a>" ) ; 
+			o.WriteLine( "<script id=\"main-script\">" ) ; 
+			o.WriteLine( "const qa = window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
+			o.WriteLine( "let qq = Array() ; " ) ; 
+			o.WriteLine( "for( let q of qa ) " ) ; 
+			o.WriteLine( "{" ) ; 
+			o.WriteLine( "let temp = {} ; " ) ; 
+			o.WriteLine( "temp[q.split( '=' )[0]] = q.split( '=' )[1] ; " ) ; 
+			o.WriteLine( "qq.push( temp ) ; " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "const q = { q: qq.filter( i => i.q ).length ? qq.filter( i => i.q )[0].q : null , c: qq.filter( i => i.c ).length ? qq.filter( i => i.c )[0].c : null } ; " ) ; 
+			o.WriteLine( "if( q ) " ) ; 
+			o.WriteLine( "{" ) ; 
+			o.WriteLine( "const arr = [ ... document.getElementsByTagName( \"main\" )[0].children[2].children[1].children ] ; " ) ; 
+			o.WriteLine( "if( q.q ) " ) ; 
+			o.WriteLine( "{" ) ; 
+			o.WriteLine( "q.q = decodeURI( q.q ) ; " ) ; 
+			o.WriteLine( "}" ) ; 
+			o.WriteLine( "if( q.c ) " ) ; 
+			o.WriteLine( "{ " ) ; 
+			o.WriteLine( "q.c = decodeURI( q.c ) ; " ) ; 
+			o.WriteLine( "arr.filter( e => e.getAttribute( \"data-cat\" ) != q.c ) " ) ; // o.WriteLine( "arr.filter( e => e.children[1].innerText != q.c ) " ) ; 
+			o.WriteLine( ".forEach( e => e.style.display = \"none\" ) ; " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "</script>" ) ; 
 			o.WriteLine( foot ) ; 
 		}
 
