@@ -342,7 +342,7 @@ partial class Program
 			o.WriteLine( "類別：" ) ; 
 			o.WriteLine( "</label>" ) ; 
 			o.WriteLine( "<select name=\"c\" id=\"c\">" ) ; 
-			o.WriteLine( "<option>" ) ; 
+			o.WriteLine( "<option value=\"\">" ) ; 
 			o.WriteLine( "不限" ) ; 
 			o.WriteLine( "</option>" ) ; 
 			o.WriteLine( "<option value=\"c\">" ) ; 
@@ -365,7 +365,7 @@ partial class Program
 			o.WriteLine( "狀態：" ) ; 
 			o.WriteLine( "</label>" ) ; 
 			o.WriteLine( "<select name=\"ab\" id=\"ab\">" ) ; 
-			o.WriteLine( "<option>" ) ; 
+			o.WriteLine( "<option value=\"\">" ) ; 
 			o.WriteLine( "不限" ) ; 
 			o.WriteLine( "</option>" ) ; 
 			o.WriteLine( "<option value=\"false\">" ) ; 
@@ -379,7 +379,7 @@ partial class Program
 			o.WriteLine( "位階：" ) ; 
 			o.WriteLine( "</label>" ) ; 
 			o.WriteLine( "<select name=\"l\" id=\"lv\">" ) ; 
-			o.WriteLine( "<option>" ) ; 
+			o.WriteLine( "<option value=\"\">" ) ; 
 			o.WriteLine( "不限" ) ; 
 			o.WriteLine( "</option>" ) ; 
 			o.WriteLine( "<option value=\"章程\">" ) ; 
@@ -399,7 +399,7 @@ partial class Program
 			o.WriteLine( "</form>" ) ; 
 			o.WriteLine( "<select>" ) ; 
 			const string la = "latest" , ol = "oldest" , lo = "long" , sh = "short" , loP = "longPure" , shP = "shortPure" , c2o = "CtoO" , o2c = "OtoC" , de = "de" ; 
-			o.WriteLine( "<option>" ) ; 
+			o.WriteLine( "<option value=\"\">" ) ; 
 			o.WriteLine( "預設" ) ; 
 			o.WriteLine( "</option>" ) ; 
 			o.WriteLine($"<option value=\"{ la }\">" ) ; 
@@ -556,7 +556,7 @@ partial class Program
 			o.WriteLine( "temp[q.split( '=' )[0]] = q.split( '=' )[1] ; " ) ; 
 			o.WriteLine( "qq.push( temp ) ; " ) ; 
 			o.WriteLine( "} " ) ; 
-			o.WriteLine( "const q = { q: qq.filter( i => i.q ).length ? qq.filter( i => i.q )[0].q : null , c: qq.filter( i => i.c ).length ? qq.filter( i => i.c )[0].c : null , l: qq.filter( i => i.l ).length ? qq.filter( i => i.l )[0].l : null } ; " ) ; 
+			o.WriteLine( "const q = { q: qq.filter( i => i.q ).length ? qq.filter( i => i.q )[0].q : null , c: qq.filter( i => i.c ).length ? qq.filter( i => i.c )[0].c : null , l: qq.filter( i => i.l ).length ? qq.filter( i => i.l )[0].l : null , ab: qq.filter( i => i.ab ).length ? qq.filter( i => i.ab )[0].ab : null } ; " ) ; 
 			o.WriteLine( "if( q ) " ) ; 
 			o.WriteLine( "{" ) ; 
 			o.WriteLine( "const arr = [ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
@@ -579,6 +579,12 @@ partial class Program
 			o.WriteLine( "{ " ) ; 
 			o.WriteLine( "q.l = decodeURI( q.l ) ; " ) ; 
 			o.WriteLine( "arr.filter( e => e.getAttribute( \"data-lv\" ) - lvarr.indexOf( q.l ) ) " ) ; 
+			o.WriteLine( ".forEach( e => { e.style.display = \"none\" ; } ) " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "if( q.ab ) " ) ; 
+			o.WriteLine( "{ " ) ; 
+			o.WriteLine( "q.ab = decodeURI( q.ab ) ; " ) ; 
+			o.WriteLine( "arr.filter( e => (bool)e.getAttribute( \"data-a\" ).length == ( q.ab == 'true' ) ) " ) ; 
 			o.WriteLine( ".forEach( e => { e.style.display = \"none\" ; } ) " ) ; 
 			o.WriteLine( "} " ) ; 
 			o.WriteLine( "} " ) ; 
