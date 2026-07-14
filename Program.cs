@@ -2356,6 +2356,7 @@ partial class Program
 			foreach( var cas in cases ) 
 			{
 			o.WriteLine( "<tr " ) ; 
+			o.WriteLine($"data-c=\"{ hassp.Replace( cas.No + cas.Title + cas.Cause + cas.Petitioner + cas.Plaintiff + cas.Defendant + cas.Syllabus + string.Join( "" , cas.Rulings.Select( x => x.RulingNo ) ) + string.Join( "" , cas.Opinions.Select( x => x.Type + x.Member ) ) , "" ) }\"" ) ; 
 			o.WriteLine($"data-cat=\"{ cas.Category }\"" ) ; 
 			o.WriteLine( ">" ) ; 
 			o.WriteLine( "<td>" ) ; 
@@ -2382,6 +2383,7 @@ partial class Program
 			}
 			o.WriteLine( "</tbody>" ) ; 
 			o.WriteLine( "</table>" ) ; 
+			o.WriteLine( "<div id=\"lawnoresult\" style=\"display:none;\">查無資料</div>" ) ; 
 			o.WriteLine( "<br />" ) ; 
 			o.WriteLine( "<a class=\"printNoDisplay\" href=\"\">回首頁</a>" ) ; 
 			o.WriteLine( "<script id=\"main-script\">" ) ; 
@@ -2396,16 +2398,22 @@ partial class Program
 			o.WriteLine( "const q = { q: qq.filter( i => i.q ).length ? qq.filter( i => i.q )[0].q : null , c: qq.filter( i => i.c ).length ? qq.filter( i => i.c )[0].c : null } ; " ) ; 
 			o.WriteLine( "if( q ) " ) ; 
 			o.WriteLine( "{" ) ; 
-			o.WriteLine( "const arr = [ ... document.getElementsByTagName( \"main\" )[0].children[2].children[1].children ] ; " ) ; 
+			o.WriteLine( "const arr = [ ... document.getElementsByTagName( \"tbody\" )[0].children ] ; " ) ; 
 			o.WriteLine( "if( q.q ) " ) ; 
 			o.WriteLine( "{" ) ; 
 			o.WriteLine( "q.q = decodeURI( q.q ) ; " ) ; 
+			o.WriteLine( "arr.filter( e => !q.q.split( /\\s/g ).some( x => e.getAttribute( \"data-c\" ).includes( x ) ) ) " ) ; 
+			o.WriteLine( ".forEach( e => e.style.display = \"none\" ) ; " ) ; 
 			o.WriteLine( "}" ) ; 
 			o.WriteLine( "if( q.c ) " ) ; 
 			o.WriteLine( "{ " ) ; 
 			o.WriteLine( "q.c = decodeURI( q.c ) ; " ) ; 
 			o.WriteLine( "arr.filter( e => e.getAttribute( \"data-cat\" ) != q.c ) " ) ; // o.WriteLine( "arr.filter( e => e.children[1].innerText != q.c ) " ) ; 
 			o.WriteLine( ".forEach( e => e.style.display = \"none\" ) ; " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "if( !arr.some( e => e.style.display != \"none\" ) ) " ) ; 
+			o.WriteLine( "{ " ) ; 
+			o.WriteLine( "document.getElementById( \"lawnoresult\" ).style.display = \"block\" ; " ) ; 
 			o.WriteLine( "} " ) ; 
 			o.WriteLine( "} " ) ; 
 			o.WriteLine( "</script>" ) ; 
