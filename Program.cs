@@ -547,6 +547,7 @@ partial class Program
 			o.WriteLine($"function { de }( l , h ) {{ return l.getAttribute( \"data-i\"  ) - h.getAttribute( \"data-i\"  ) ; }} " ) ; 
 			o.WriteLine( fn_preview( "e" , "s" ) ) ; 
 			o.WriteLine($"const cat_t = {{ { CatT.c }: { (int)CatT.c } , { CatT.ex }: { (int)CatT.ex } , { CatT.l }: { (int)CatT.l } , { CatT.j }: { (int)CatT.j } , { CatT.el }: { (int)CatT.el } }} ; " ) ; 
+			o.WriteLine($"const lvarr = [\"{ string.Join( "\" , \"" , lvarr ) }\"] ; " ) ; 
 			o.WriteLine( "const qa = window.location.search.substring( 1 ).split( '&' )[0] ? window.location.search.substring( 1 ).split( '&' ) : [] ; " ) ; 
 			o.WriteLine( "let qq = Array() ; " ) ; 
 			o.WriteLine( "for( let q of qa ) " ) ; 
@@ -555,7 +556,7 @@ partial class Program
 			o.WriteLine( "temp[q.split( '=' )[0]] = q.split( '=' )[1] ; " ) ; 
 			o.WriteLine( "qq.push( temp ) ; " ) ; 
 			o.WriteLine( "} " ) ; 
-			o.WriteLine( "const q = { q: qq.filter( i => i.q ).length ? qq.filter( i => i.q )[0].q : null , c: qq.filter( i => i.c ).length ? qq.filter( i => i.c )[0].c : null } ; " ) ; 
+			o.WriteLine( "const q = { q: qq.filter( i => i.q ).length ? qq.filter( i => i.q )[0].q : null , c: qq.filter( i => i.c ).length ? qq.filter( i => i.c )[0].c : null , l: qq.filter( i => i.l ).length ? qq.filter( i => i.l )[0].l : null } ; " ) ; 
 			o.WriteLine( "if( q ) " ) ; 
 			o.WriteLine( "{" ) ; 
 			o.WriteLine( "const arr = [ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
@@ -572,6 +573,12 @@ partial class Program
 			o.WriteLine( "{ " ) ; 
 			o.WriteLine( "q.c = decodeURI( q.c ) ; " ) ; 
 			o.WriteLine( "arr.filter( e => e.getAttribute( \"data-cat\" ) - cat_t[q.c.toLowerCase()] ) " ) ; 
+			o.WriteLine( ".forEach( e => { e.style.display = \"none\" ; } ) " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "if( q.l ) " ) ; 
+			o.WriteLine( "{ " ) ; 
+			o.WriteLine( "q.l = decodeURI( q.l ) ; " ) ; 
+			o.WriteLine( "arr.filter( e => e.getAttribute( \"data-lv\" ) - lvarr.indexOf( q.l ) ) " ) ; 
 			o.WriteLine( ".forEach( e => { e.style.display = \"none\" ; } ) " ) ; 
 			o.WriteLine( "} " ) ; 
 			o.WriteLine( "} " ) ; 
