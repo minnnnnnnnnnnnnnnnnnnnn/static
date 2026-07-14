@@ -476,6 +476,7 @@ partial class Program
 				o.WriteLine( "</div>" ) ; 
 				o.WriteLine( "</a>" ) ; 
 			}
+			o.WriteLine( "<div id=\"lawnoresult\" style=\"display:none;\">查無資料</div>" ) ; 
 			o.WriteLine( "<script id=\"main-script\">" ) ; 
 			static string fn_preview( string e , string s ) 
 			{
@@ -556,11 +557,11 @@ partial class Program
 			o.WriteLine( "temp[q.split( '=' )[0]] = q.split( '=' )[1] ; " ) ; 
 			o.WriteLine( "qq.push( temp ) ; " ) ; 
 			o.WriteLine( "} " ) ; 
-			o.WriteLine( "const q = { q: qq.filter( i => i.q ).length ? qq.filter( i => i.q )[0].q : null , c: qq.filter( i => i.c ).length ? qq.filter( i => i.c )[0].c : null , l: qq.filter( i => i.l ).length ? qq.filter( i => i.l )[0].l : null , ab: qq.filter( i => i.ab ).length ? qq.filter( i => i.ab )[0].ab : null } ; " ) ; 
-			o.WriteLine( "if( q ) " ) ; 
-			o.WriteLine( "{" ) ; 
+			o.WriteLine( "const q = { q: qq.filter( i => i.q ).length ? qq.filter( i => i.q )[0].q : null , c: qq.filter( i => i.c ).length ? qq.filter( i => i.c )[0].c : null , l: qq.filter( i => i.l ).length ? qq.filter( i => i.l )[0].l : null , ab: qq.filter( i => i.ab ).length ? ( qq.filter( i => i.ab )[0].ab == 'true' ? true : qq.filter( i => i.ab )[0].ab != 'false' ) : null } ; " ) ; 
 			o.WriteLine( "const arr = [ ... document.getElementsByTagName( \"main\" )[0].children ] " ) ; 
 			o.WriteLine( ".filter( e => e.tagName == \"A\" ) ; " ) ; 
+			o.WriteLine( "if( q ) " ) ; 
+			o.WriteLine( "{" ) ; 
 			o.WriteLine( "if( q.q ) " ) ; 
 			o.WriteLine( "{" ) ; 
 			o.WriteLine( "q.q = decodeURI( q.q ) ; " ) ; 
@@ -581,12 +582,15 @@ partial class Program
 			o.WriteLine( "arr.filter( e => e.getAttribute( \"data-lv\" ) - lvarr.indexOf( q.l ) ) " ) ; 
 			o.WriteLine( ".forEach( e => { e.style.display = \"none\" ; } ) " ) ; 
 			o.WriteLine( "} " ) ; 
-			o.WriteLine( "if( q.ab ) " ) ; 
+			o.WriteLine( "if( q.ab != null ) " ) ; 
 			o.WriteLine( "{ " ) ; 
-			o.WriteLine( "q.ab = decodeURI( q.ab ) ; " ) ; 
-			o.WriteLine( "arr.filter( e => (bool)e.getAttribute( \"data-a\" ).length == ( q.ab == 'true' ) ) " ) ; 
+			o.WriteLine( "arr.filter( e => e.getAttribute( \"data-a\" ).length ? !q.ab : q.ab ) " ) ; 
 			o.WriteLine( ".forEach( e => { e.style.display = \"none\" ; } ) " ) ; 
 			o.WriteLine( "} " ) ; 
+			o.WriteLine( "} " ) ; 
+			o.WriteLine( "if( !arr.some( e => e.style.display != \"none\" ) ) " ) ; 
+			o.WriteLine( "{ " ) ; 
+			o.WriteLine( "document.getElementById( \"lawnoresult\" ).style.display = \"block\" ; " ) ; 
 			o.WriteLine( "} " ) ; 
 			o.WriteLine( "document.querySelector( \"main.main > select\" ).addEventListener( \"input\" , " ) ; 
 			o.WriteLine( "function( e ) " ) ; 
